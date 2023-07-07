@@ -994,10 +994,7 @@
 // console.log(solution(8, [2, 1, 2, 6, 2, 4, 3, 3]))
 //
 // console.log(count())
-//
-//
-//
-//
+
 function solution(number, limit, power) {
     let sum = 0
     for (let i = 1; i <= number; i++) {
