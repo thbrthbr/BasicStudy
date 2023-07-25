@@ -1051,6 +1051,7 @@
 //
 //
 //
+//
 function solution(n, lost, reserve) {
     let gusa = 0
     for (let i = 0; i < lost.length; i++) {
