@@ -1046,7 +1046,7 @@
 //     return String(+arr.sort((x, y) => y - x).join(''))
 // }
 // console.log(solution('1010', '1010'))
-
+//
 function solution(n, lost, reserve) {
     let gusa = 0
     for (let i = 0; i < lost.length; i++) {
