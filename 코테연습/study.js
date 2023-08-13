@@ -320,18 +320,262 @@
 
 // console.log(solution('20x'))
 
-function solution(numbers) {
-  let max = 0
-  for (let i = 0; i < numbers.length; i++) {
-    for (let j = 0; j < numbers.length; j++) {
-      if (i != j) {
-        if (numbers[j] * numbers[i] > max) {
-          max = numbers[j] * numbers[i]
-        }
-      }
-    }
-  }
-  return max
+// function solution(numbers) {
+//   let max = 0
+//   for (let i = 0; i < numbers.length; i++) {
+//     for (let j = 0; j < numbers.length; j++) {
+//       if (i != j) {
+//         if (numbers[j] * numbers[i] > max) {
+//           max = numbers[j] * numbers[i]
+//         }
+//       }
+//     }
+//   }
+//   return max
+// }
+
+// console.log(solution([-1, -2, -5, -5]))
+
+// function solution(keyinput, board) {
+//     let start = [0, 0]
+//     for (let i = 0; i < keyinput.length; i++) {
+//         if (keyinput[i] == 'right') {
+//             if (Math.floor(board[0] / 2) >= start[0] + 1) {
+//                 start[0] = start[0] + 1
+//             }
+//         } else if (keyinput[i] == 'left') {
+//             if (-1 * Math.floor(board[0] / 2) <= start[0] - 1) {
+//                 start[0] = start[0] - 1
+//             }
+//         } else if (keyinput[i] == 'up') {
+//             if (Math.floor(board[1] / 2) >= start[1] + 1) {
+//                 start[1] = start[1] + 1
+//             }
+//         } else if (keyinput[i] == 'down') {
+//             if (-1 * Math.floor(board[1] / 2) <= start[1] - 1) {
+//                 start[1] = start[1] - 1
+//             }
+//         }
+//         console.log(start)
+//     }
+//     return start
+// }
+
+// console.log(
+//     solution(
+//         ['down', 'down', 'down', 'down', 'down', 'down', 'down', 'down'],
+//         [7, 18],
+//     ),
+// )
+
+// function solution(emergency) {
+//     let count = 1
+//     let answer = Array.from({ length: emergency.length }, (v, i) => 0)
+//     for (let i = 0; i < emergency.length; i++) {
+//         let max = Math.max(...emergency)
+//         for (let j = 0; j < emergency.length; j++) {
+//             if (emergency[j] == max) {
+//                 answer[j] = count
+//                 count++
+//                 emergency[j] = -1
+//                 break
+//             }
+//         }
+//     }
+//     return answer
+// }
+// console.log(solution([3, 76, 24]))
+
+// function solution(array) {
+//     array = array.sort((x, y) => x - y)
+//     let count = 1
+//     let now = 0
+//     let answer = [array[0], -1]
+//     if (array.length == 1) return array[0]
+//     for (let i = 0; i < array.length - 1; i++) {
+//         if (array[i] == array[i + 1]) {
+//             now = array[i]
+//             count++
+//         } else {
+//             if (answer[1] < count) {
+//                 answer.pop()
+//                 answer.pop()
+//                 answer.push(now)
+//                 answer.push(count)
+//             } else if (answer[1] == count && count !== 1) return -1
+//             now = array[i]
+//             count = 1
+//         }
+//     }
+//     if (answer[1] == count) return -1
+//     else if (answer[1] < count) {
+//         answer.pop()
+//         answer.pop()
+//         answer.push(now)
+//         answer.push(count)
+//     }
+//     return answer[0]
+// }
+
+// console.log(solution([0, 1, 1, 1, 1, 1]))
+
+// function solution(array) {
+//     let obj = {}
+//     let arr = []
+//     let set = Array.from(new Set(array)).sort((x, y) => x - y)
+//     let count = 0
+//     for (let i = 0; i < set.length; i++) {
+//         obj[set[i]] = 0
+//     }
+//     for (let i = 0; i < array.length; i++) {
+//         obj[array[i]] += 1
+//     }
+//     for (let i in obj) {
+//         arr.push(obj[i])
+//     }
+//     let sort = arr.sort((x, y) => y - x)
+//     console.log(obj)
+//     console.log(arr)
+//     if (arr.length == 1) {
+//         for (let i in obj) {
+//             return Number(i)
+//         }
+//     } else {
+//         if (sort[0] == sort[1]) return -1
+//         else {
+//             let max = Math.max(...sort)
+//             for (let i in obj) {
+//                 if (obj[i] == max) {
+//                     return Number(i)
+//                 }
+//             }
+//         }
+//     }
+// }
+// console.log(solution([1, 1, 1]))
+
+// function solution(letter) {
+//     morse = {
+//         '.-': 'a',
+//         '-...': 'b',
+//         '-.-.': 'c',
+//         '-..': 'd',
+//         '.': 'e',
+//         '..-.': 'f',
+//         '--.': 'g',
+//         '....': 'h',
+//         '..': 'i',
+//         '.---': 'j',
+//         '-.-': 'k',
+//         '.-..': 'l',
+//         '--': 'm',
+//         '-.': 'n',
+//         '---': 'o',
+//         '.--.': 'p',
+//         '--.-': 'q',
+//         '.-.': 'r',
+//         '...': 's',
+//         '-': 't',
+//         '..-': 'u',
+//         '...-': 'v',
+//         '.--': 'w',
+//         '-..-': 'x',
+//         '-.--': 'y',
+//         '--..': 'z',
+//     }
+//     let arr = letter.split(' ')
+//     let answer = ''
+//     for (let i = 0; i < arr.length; i++) {
+//         answer += morse[arr[i]]
+//     }
+//     return answer;
+// }
+
+// function solution(numbers, k) {
+//     let copy = numbers.slice(0)
+//     while (k * 2 > copy.length) {
+//         copy = copy.concat(numbers)
+//     }
+//     console.log(copy)
+//     let last = 0
+//     let times = 0
+//     for (let i = 0; i < k; i++) {
+//         last = copy[times]
+//         times += 2
+//     }
+//     return last
+// }
+
+// console.log(solution([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 90))
+
+// function solution(n) {
+//     let arr = []
+//     let answer = []
+//     for (let i = 2; i <= n; i++) {
+//         if (n % i == 0) arr.push(i)
+//     }
+//     for (let i = 0; i < arr.length; i++) {
+//         if (arr[i] === 2) {
+//             answer.push(arr[i])
+//         }
+
+//         let check = 0
+//         for (let j = 2; j <= Math.ceil(Math.sqrt(arr[i])); j++) {
+//             if (arr[i] % j === 0) {
+//                 check = 1
+//                 break
+//             }
+//         }
+//         if (check == 0) answer.push(arr[i])
+//     }
+//     return answer
+// }
+
+// console.log(solution(420))
+
+// function solution(balls, share) {
+//     let n = 1
+//     let n_m = 1
+//     for (let i = share + 1; i <= balls; i++) {
+//         n = BigInt(n) * BigInt(i)
+//     }
+//     for (let i = 1; i <= balls - share; i++) {
+//         n_m = BigInt(n_m) * BigInt(i)
+//     }
+//     return n / n_m
+// }
+
+// console.log(solution(30, 15))
+
+// function getCombinations(arr, N) {
+//     const results = []
+//     if (N === 1) return arr.map((value) => [value])
+
+//     arr.forEach((fixed, index, origin) => {
+//         const rest = origin.slice(index + 1)
+//         const combinations = getCombinations(rest, N - 1)
+//         const attached = combinations.map((combination) => [
+//             fixed,
+//             ...combination,
+//         ])
+//         results.push(...attached)
+//     })
+
+//     return results
+// }
+
+// console.log(
+//     getCombinations(
+//         [
+//             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+//             20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+//         ],
+//         15,
+//     ),
+// )
+
+function solution(s) {
+    return isNaN(+s) ? false : true
 }
 
-console.log(solution([-1, -2, -5, -5]))
+console.log(solution(''))
