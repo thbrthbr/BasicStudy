@@ -574,8 +574,175 @@
 //     ),
 // )
 
-function solution(s) {
-    return isNaN(+s) ? false : true
-}
+// function solution(s) {
+//     return isNaN(+s) ? false : true
+// }
 
-console.log(solution(''))
+// console.log(solution(''))
+
+// function solution(n, m) {
+//     var answer = []
+//     let bitArr = []
+//     let bigArr = []
+//     let bigger = Math.max(n, m)
+//     let bitter = Math.min(n, m)
+//     let temp = bigger
+//     for (let i = 1; i <= bitter; i++) {
+//         if (temp % bitter == 0) {
+//             answer.push(temp)
+//             break
+//         } else temp = bigger * i
+//     }
+//     if (answer.length == 0) answer.push(temp)
+//     for (let i = 1; i <= bitter; i++) {
+//         if (bitter % i == 0) bitArr.unshift(i)
+//     }
+//     for (let i = 1; i <= bigger; i++) {
+//         if (bigger % i == 0) bigArr.unshift(i)
+//     }
+//     let copy = bigArr.length
+//     for (let j = 0; j < copy; j++) {
+//         for (let i = 0; i < bitArr.length; i++) {
+//             if (bigArr[0] == bitArr[i]) {
+//                 answer.unshift(bitArr[i])
+//                 return answer
+//             }
+//         }
+//         bigArr.shift()
+//     }
+//     return answer
+// }
+
+// console.log(solution(3, 20))
+
+// function solution(number) {
+//     let answer = []
+//     let save = []
+//     for (let i = 0; i < number.length; i++) {
+//         for (let j = 0; j < number.length; j++) {
+//             for (let a = 0; a < number.length; a++) {
+//                 if (i !== j && j !== a && a !== i) {
+//                     if (number[a] + number[i] + number[j] == 0) {
+//                         if (
+//                             !save.includes(
+//                                 [a, i, j].sort((x, y) => x - y).join(''),
+//                             )
+//                         ) {
+//                             let temp = []
+//                             temp.push(number[a])
+//                             temp.push(number[j])
+//                             temp.push(number[i])
+//                             answer.push(temp.sort().join(''))
+//                             save.push([a, i, j].sort((x, y) => x - y).join(''))
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     console.log(answer)
+//     return answer.length
+// }
+// solution([-3, -2, -1, 0, 0, 0, 1, 2, 3])
+
+// function solution(number) {
+//     let answer = 0
+//     for (let i = 0; i < number.length - 2; ++i) {
+//         for (let j = i + 1; j < number.length - 1; ++j) {
+//             for (let k = j + 1; k < number.length; ++k) {
+//                 if (number[i] + number[j] + number[k] == 0) ++answer
+//             }
+//         }
+//     }
+//     return answer
+// }
+
+// function solution(s) {
+//     let obj = {
+//         one: 1,
+//         two: 2,
+//         three: 3,
+//         four: 4,
+//         five: 5,
+//         six: 6,
+//         seven: 7,
+//         eight: 8,
+//         nine: 9,
+//         zero: '0',
+//     }
+//     let num = '0123456789'
+//     let each = ''
+//     let answer = ''
+//     for (let i = 0; i < s.length; i++) {
+//         if (!num.includes(s[i])) {
+//             each += s[i].toLowerCase()
+//             console.log(each)
+//             if (obj[each]) {
+//                 answer += obj[each]
+//                 each = ''
+//             }
+//         } else {
+//             answer += s[i]
+//         }
+//     }
+//     return +answer
+// }
+
+// console.log(solution('111zero1'))
+
+// function solution(n, arr1, arr2) {
+//     let answer = []
+//     for (let i = 0; i < n; i++) {
+//         let fir =
+//             arr1[i].toString(2).length < n
+//                 ? '0'.repeat(n - arr1[i].toString(2).length) +
+//                   arr1[i].toString(2)
+//                 : arr1[i].toString(2)
+//         let sec =
+//             arr2[i].toString(2).length < n
+//                 ? '0'.repeat(n - arr2[i].toString(2).length) +
+//                   arr2[i].toString(2)
+//                 : arr2[i].toString(2)
+//         let thr = ''
+//         for (let j = 0; j < fir.length; j++) {
+//             thr += fir[j] == 1 || sec[j] == 1 ? 1 : 0
+//         }
+//         answer.push(thr)
+//     }
+//     for (let i = 0; i < answer.length; i++) {
+//         let temp = answer[i].split('')
+//         for (let j = 0; j < answer.length; j++) {
+//             if (temp[j] == '1') temp[j] = '#'
+//             else temp[j] = ' '
+//         }
+//         answer[i] = temp.join('')
+//     }
+//     console.log(answer)
+//     return answer
+// }
+
+// ;['######', '### #', '## ##', ' #### ', ' #####', '### # ']
+
+// solution(6, [46, 33, 33, 22, 31, 50], [27, 56, 19, 14, 14, 10])
+
+// function solution(s) {
+//     let answer = [-1]
+//     for (let i = 1; i < s.length; i++) {
+//         let idx = 0
+//         for (let j = i - 1; j > 0; j--) {
+//             idx++
+//             if (s[i] == s[j]) {
+//                 console.log(s[i])
+//                 answer.push(idx)
+//                 break
+//             }
+//         }
+//         if (idx == 0) {
+//             console.log(s[i])
+//             answer.push(-1)
+//         }
+//     }
+//     console.log(answer)
+// }
+
+// console.log(solution('banana'))
