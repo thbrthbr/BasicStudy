@@ -726,23 +726,41 @@
 // solution(6, [46, 33, 33, 22, 31, 50], [27, 56, 19, 14, 14, 10])
 
 // function solution(s) {
-//     let answer = [-1]
-//     for (let i = 1; i < s.length; i++) {
+//     let answer = []
+//     let check = false
+//     for (let i = 0; i < s.length; i++) {
 //         let idx = 0
-//         for (let j = i - 1; j > 0; j--) {
+//         for (let j = i - 1; j >= 0; j--) {
 //             idx++
 //             if (s[i] == s[j]) {
-//                 console.log(s[i])
 //                 answer.push(idx)
+//                 check = true
 //                 break
 //             }
 //         }
-//         if (idx == 0) {
-//             console.log(s[i])
+//         if (check == false) {
 //             answer.push(-1)
 //         }
+//         check = false
 //     }
-//     console.log(answer)
+//     return answer
 // }
 
-// console.log(solution('banana'))
+// console.log(solution('foobar'))
+
+function solution(s, skip, index) {
+    let alphabet =
+        'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+    let answer = ''
+    for (let i = 0; i < s.length; i++) {
+        let temp = alphabet.indexOf(s[i])
+        let copy = index + temp
+        let save = 0
+        for (let j = temp + 1; j <= copy; j++) {
+            if (skip.includes(alphabet[j])) copy += 1
+            save = j
+        }
+        answer += alphabet[save]
+    }
+    return answer
+}
