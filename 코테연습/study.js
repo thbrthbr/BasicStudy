@@ -748,19 +748,19 @@
 
 // console.log(solution('foobar'))
 
-function solution(s, skip, index) {
-    let alphabet =
-        'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
-    let answer = ''
-    for (let i = 0; i < s.length; i++) {
-        let temp = alphabet.indexOf(s[i])
-        let copy = index + temp
-        let save = 0
-        for (let j = temp + 1; j <= copy; j++) {
-            if (skip.includes(alphabet[j])) copy += 1
-            save = j
-        }
-        answer += alphabet[save]
-    }
-    return answer
-}
+// function solution(s, skip, index) {
+//     let alphabet =
+//         'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+//     let answer = ''
+//     for (let i = 0; i < s.length; i++) {
+//         let temp = alphabet.indexOf(s[i])
+//         let copy = index + temp
+//         let save = 0
+//         for (let j = temp + 1; j <= copy; j++) {
+//             if (skip.includes(alphabet[j])) copy += 1
+//             save = j
+//         }
+//         answer += alphabet[save]
+//     }
+//     return answer
+// }
