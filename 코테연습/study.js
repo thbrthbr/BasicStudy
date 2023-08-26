@@ -764,3 +764,63 @@
 //     }
 //     return answer
 // }
+
+// function solution(a, b, n) {
+//     let sum = 0
+//     while (n >= a) {
+//         sum += parseInt(n / a) * b
+//         let copy = n
+//         n = parseInt(n / a) * b
+//         n += copy % a
+//     }
+
+//     return sum
+// }
+
+// function solution(k, score) {
+//     let hallOfFame = [-1]
+//     let present = []
+//     for (let i = 0; i < score.length; i++) {
+//         if (
+//             hallOfFame.length < k ||
+//             hallOfFame[hallOfFame.length - 1] <= score[i]
+//         ) {
+//             hallOfFame.push(score[i])
+//         }
+//         hallOfFame = hallOfFame.sort((x, y) => y - x)
+//         if (hallOfFame.includes(-1)) {
+//             hallOfFame.pop()
+//         }
+//         hallOfFame = hallOfFame.slice(0, k)
+//         present.push(hallOfFame[hallOfFame.length - 1])
+//         console.log(hallOfFame)
+//     }
+//     return present
+// }
+
+// console.log(solution(3, [50, 40, 40, 40, 40, 40, 40]))
+
+function solution(keymap, targets) {
+    let answer = []
+    for (let i = 0; i < targets.length; i++) {
+        let sum = 0
+        for (let a = 0; a < targets[i].length; a++) {
+            let less = []
+            for (let j = 0; j < keymap.length; j++) {
+                if (keymap[j].includes(targets[i][a])) {
+                    less.push(keymap[j].indexOf(targets[i][a]) + 1)
+                }
+            }
+            if (less.length !== 0) {
+                sum += Math.min(...less)
+            } else {
+                sum = 0
+                break
+            }
+        }
+        sum == 0 ? answer.push(-1) : answer.push(sum)
+    }
+    return answer
+}
+
+console.log(solution(['ACC', 'CAC'], ['CD', 'C']))
