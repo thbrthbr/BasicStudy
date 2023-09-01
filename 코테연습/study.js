@@ -800,27 +800,196 @@
 
 // console.log(solution(3, [50, 40, 40, 40, 40, 40, 40]))
 
-function solution(keymap, targets) {
+// function solution(keymap, targets) {
+//     let answer = []
+//     for (let i = 0; i < targets.length; i++) {
+//         let sum = 0
+//         for (let a = 0; a < targets[i].length; a++) {
+//             let less = []
+//             for (let j = 0; j < keymap.length; j++) {
+//                 if (keymap[j].includes(targets[i][a])) {
+//                     less.push(keymap[j].indexOf(targets[i][a]) + 1)
+//                 }
+//             }
+//             if (less.length !== 0) {
+//                 sum += Math.min(...less)
+//             } else {
+//                 sum = 0
+//                 break
+//             }
+//         }
+//         sum == 0 ? answer.push(-1) : answer.push(sum)
+//     }
+//     return answer
+// }
+
+// console.log(solution(['ACC', 'CAC'], ['CD', 'C']))
+
+// function solution(nums) {
+//     let sum = 0
+//     let repeat = nums.reduce((x, y) => x + y, 0)
+//     let sosu = []
+//     for (let i = 2; i <= repeat; i++) {
+//         let flag = 0
+//         for (let j = 2; j < i; j++) {
+//             if (i % j == 0) {
+//                 flag = 1
+//                 break
+//             }
+//         }
+//         if (flag == 0) sosu.push(i)
+//     }
+//     for (let i = 0; i < nums.length - 2; i++) {
+//         for (let j = i + 1; j < nums.length - 1; j++) {
+//             for (let k = j + 1; k < nums.length; k++) {
+//                 if (sosu.includes(nums[i] + nums[j] + nums[k])) {
+//                     sum++
+//                 }
+//             }
+//         }
+//     }
+//     return sum
+// }
+
+// function solution(n) {
+//     let sum = 0
+//     for (let i = 2; i <= n; i++) {
+//         let flag = 0
+//         for (let j = 2; j < Math.sqrt(i); j++) {
+//             if (i % j == 0) {
+//                 flag = 1
+//                 break
+//             }
+//         }
+//         if (flag == 0) sum++
+//     }
+//     return sum
+// }
+
+// function solution(n) {
+//     let sum = 0
+//     for (let j = 2; j <= n; j++) {
+//         let flag = 0
+//         for (let i = 2; i <= Math.floor(Math.sqrt(j)); i++) {
+//             if (j % i == 0) {
+//                 flag = 1
+//                 break
+//             }
+//         }
+//         if (flag == 0) {
+//             sum++
+//         }
+//     }
+//     return sum
+// }
+
+// console.log(solution(10))
+
+// function solution(nums) {
+//     let sum = 0
+//     let repeat = nums.reduce((x, y) => x + y, 0)
+//     let sosu = []
+//     for (let i = 2; i <= repeat; i++) {
+//         let flag = 0
+//         for (let j = 2; j <= Math.floor(Math.sqrt(i)); j++) {
+//             if (i % j == 0) {
+//                 flag = 1
+//                 break
+//             }
+//         }
+//         if (flag == 0) sosu.push(i)
+//     }
+//     for (let i = 0; i < nums.length - 2; i++) {
+//         for (let j = i + 1; j < nums.length - 1; j++) {
+//             for (let k = j + 1; k < nums.length; k++) {
+//                 if (sosu.includes(nums[i] + nums[j] + nums[k])) {
+//                     sum++
+//                 }
+//             }
+//         }
+//     }
+//     return sum
+// }
+
+// function solution(n, m, section) {
+//     let sum = 0
+//     let area = []
+//     let start = section[0]
+//     while (section.length > 0) {
+//         area.push(start)
+//         start++
+//         if (area.length == m) {
+//             let copy = section.length
+//             for (let i = 0; i < copy; i++) {
+//                 if (area.includes(section[0])) {
+//                     section.shift()
+//                 }
+//             }
+//             area = []
+//             sum++
+//         }
+//     }
+//     return sum
+// }
+
+// function solution(n, m, section) {
+//     let sum = 0
+//     for (let i = section[0]; i <= n; i++) {
+//         if (i == section[0]) {
+//             let these = i
+//             for (let j = 0; j < m; j++) {
+//                 if (these == section[0]) {
+//                     section.shift()
+//                 }
+//                 these++
+//             }
+//             sum++
+//             i = section[0] - 1
+//         }
+//     }
+//     return sum
+// }
+
+function solution(N, stages) {
     let answer = []
-    for (let i = 0; i < targets.length; i++) {
+    let obj = {}
+    let survivor = stages.length
+    for (let i = 1; i <= N; i++) {
         let sum = 0
-        for (let a = 0; a < targets[i].length; a++) {
-            let less = []
-            for (let j = 0; j < keymap.length; j++) {
-                if (keymap[j].includes(targets[i][a])) {
-                    less.push(keymap[j].indexOf(targets[i][a]) + 1)
-                }
-            }
-            if (less.length !== 0) {
-                sum += Math.min(...less)
-            } else {
-                sum = 0
-                break
+        for (let j = 0; j < stages.length; j++) {
+            if (stages[j] == i) sum++
+        }
+        if (survivor <= 0) {
+            obj[i] = 0
+        } else {
+            obj[i] = sum / survivor
+        }
+        survivor -= sum
+    }
+    console.log(obj)
+    let order = []
+    let value = []
+    for (let i in obj) {
+        order.push(i)
+        value.push(+obj[i])
+    }
+    let temp = order.length
+    for (let i = 0; i < temp; i++) {
+        let max = -1
+        let maxOrder = 0
+        let the = -1
+        for (let j = 0; j < value.length; j++) {
+            if (max < value[j]) {
+                max = value[j]
+                maxOrder = order[j]
+                the = j
             }
         }
-        sum == 0 ? answer.push(-1) : answer.push(sum)
+        value.splice(the, 1)
+        order.splice(the, 1)
+        answer.push(maxOrder)
     }
     return answer
 }
 
-console.log(solution(['ACC', 'CAC'], ['CD', 'C']))
+console.log(solution(8, [2, 1, 2, 6, 2, 4, 3, 3]))
