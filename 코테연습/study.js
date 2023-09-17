@@ -991,7 +991,6 @@
 //     }
 //     return answer
 // }
-
 // console.log(solution(8, [2, 1, 2, 6, 2, 4, 3, 3]))
 //
 // console.log(count())
