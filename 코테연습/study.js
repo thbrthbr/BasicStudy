@@ -995,22 +995,54 @@
 //
 // console.log(count())
 //
-function solution(number, limit, power) {
-    let sum = 0
-    for (let i = 1; i <= number; i++) {
-        let count = 0
-        let flag = 0
-        for (let j = 1; j <= Math.sqrt(i); j++) {
-            if (i % j == 0) {
-                if (i / j === j) count += 1
-                else count += 2
-            }
-            if (count > limit) {
-                count = power
-                break
+// function solution(number, limit, power) {
+//     let sum = 0
+//     for (let i = 1; i <= number; i++) {
+//         let count = 0
+//         let flag = 0
+//         for (let j = 1; j <= Math.sqrt(i); j++) {
+//             if (i % j == 0) {
+//                 if (i / j === j) count += 1
+//                 else count += 2
+//             }
+//             if (count > limit) {
+//                 count = power
+//                 break
+//             }
+//         }
+//         sum += count
+//     }
+//     return sum
+// }
+// function solution(X, Y) {
+//     X = X.split('')
+//     Y = Y.split('')
+//     let arr = []
+//     for (let i = 0; i < X.length; i++) {
+//         for (let j = 0; j < Y.length; j++) {
+//             if (X[i] == Y[j]) {
+//                 arr.push(X[i])
+//                 X.splice(i, 1, 'p')
+//                 Y.splice(j, 1, 'q')
+//             }
+//         }
+//     }
+//     if (arr.length == 0) return '-1'
+//     return String(+arr.sort((x, y) => y - x).join(''))
+// }
+
+function solution(X, Y) {
+    let arr = []
+    for (let i = 0; i < X.length; i++) {
+        for (let j = 0; j < Y.length; j++) {
+            if (X[i] == Y[j]) {
+                arr.push(X[i])
+                X = X.replace(X[i], '_')
+                Y = Y.replace(Y[j], '-')
             }
         }
-        sum += count
     }
-    return sum
+    if (arr.length == 0) return '-1'
+    return String(+arr.sort((x, y) => y - x).join(''))
 }
+console.log(solution('1010', '1010'))
