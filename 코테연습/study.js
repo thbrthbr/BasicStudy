@@ -1031,18 +1031,66 @@
 //     return String(+arr.sort((x, y) => y - x).join(''))
 // }
 
-function solution(X, Y) {
-    let arr = []
-    for (let i = 0; i < X.length; i++) {
-        for (let j = 0; j < Y.length; j++) {
-            if (X[i] == Y[j]) {
-                arr.push(X[i])
-                X = X.replace(X[i], '_')
-                Y = Y.replace(Y[j], '-')
+// function solution(X, Y) {
+//     let arr = []
+//     for (let i = 0; i < X.length; i++) {
+//         for (let j = 0; j < Y.length; j++) {
+//             if (X[i] == Y[j]) {
+//                 arr.push(X[i])
+//                 X = X.replace(X[i], '_')
+//                 Y = Y.replace(Y[j], '-')
+//             }
+//         }
+//     }
+//     if (arr.length == 0) return '-1'
+//     return String(+arr.sort((x, y) => y - x).join(''))
+// }
+// console.log(solution('1010', '1010'))
+
+function solution(n, lost, reserve) {
+    let gusa = 0
+    for (let i = 0; i < lost.length; i++) {
+        if (reserve.includes(lost[i])) gusa++
+    }
+    let possible = n - lost.length + gusa
+    let oneCanGetHelp = {}
+    for (let i = 1; i <= n; i++) {
+        let count = []
+        for (let j = 0; j < lost.length; j++) {
+            if (i == lost[j] && !reserve.includes(i)) {
+                if (
+                    reserve.includes(lost[j] - 1) &&
+                    !lost.includes(lost[j] - 1)
+                )
+                    count.push(lost[j] - 1)
+                if (
+                    reserve.includes(lost[j] + 1) &&
+                    !lost.includes(lost[j] + 1)
+                )
+                    count.push(lost[j] + 1)
+                oneCanGetHelp[lost[j]] = count
             }
         }
     }
-    if (arr.length == 0) return '-1'
-    return String(+arr.sort((x, y) => y - x).join(''))
+    console.log(oneCanGetHelp)
+    let used = []
+    let counter = 0
+    for (let i in oneCanGetHelp) {
+        let temp = oneCanGetHelp[i].slice(0)
+        let flag = 0
+        while (temp.length !== 0) {
+            if (!used.includes(temp[0])) {
+                used.push(temp[0])
+                flag = 1
+                break
+            }
+            temp.shift()
+        }
+        if (flag == 1) {
+            counter++
+        }
+    }
+    return possible + counter
 }
-console.log(solution('1010', '1010'))
+
+console.log(solution(7, [2, 4, 5, 6], [1, 3, 4, 5]))
