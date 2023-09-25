@@ -1051,50 +1051,50 @@
 //
 //
 //
-function solution(n, lost, reserve) {
-    let gusa = 0
-    for (let i = 0; i < lost.length; i++) {
-        if (reserve.includes(lost[i])) gusa++
-    }
-    let possible = n - lost.length + gusa
-    let oneCanGetHelp = {}
-    for (let i = 1; i <= n; i++) {
-        let count = []
-        for (let j = 0; j < lost.length; j++) {
-            if (i == lost[j] && !reserve.includes(i)) {
-                if (
-                    reserve.includes(lost[j] - 1) &&
-                    !lost.includes(lost[j] - 1)
-                )
-                    count.push(lost[j] - 1)
-                if (
-                    reserve.includes(lost[j] + 1) &&
-                    !lost.includes(lost[j] + 1)
-                )
-                    count.push(lost[j] + 1)
-                oneCanGetHelp[lost[j]] = count
-            }
-        }
-    }
-    console.log(oneCanGetHelp)
-    let used = []
-    let counter = 0
-    for (let i in oneCanGetHelp) {
-        let temp = oneCanGetHelp[i].slice(0)
-        let flag = 0
-        while (temp.length !== 0) {
-            if (!used.includes(temp[0])) {
-                used.push(temp[0])
-                flag = 1
-                break
-            }
-            temp.shift()
-        }
-        if (flag == 1) {
-            counter++
-        }
-    }
-    return possible + counter
-}
+// function solution(n, lost, reserve) {
+//     let gusa = 0
+//     for (let i = 0; i < lost.length; i++) {
+//         if (reserve.includes(lost[i])) gusa++
+//     }
+//     let possible = n - lost.length + gusa
+//     let oneCanGetHelp = {}
+//     for (let i = 1; i <= n; i++) {
+//         let count = []
+//         for (let j = 0; j < lost.length; j++) {
+//             if (i == lost[j] && !reserve.includes(i)) {
+//                 if (
+//                     reserve.includes(lost[j] - 1) &&
+//                     !lost.includes(lost[j] - 1)
+//                 )
+//                     count.push(lost[j] - 1)
+//                 if (
+//                     reserve.includes(lost[j] + 1) &&
+//                     !lost.includes(lost[j] + 1)
+//                 )
+//                     count.push(lost[j] + 1)
+//                 oneCanGetHelp[lost[j]] = count
+//             }
+//         }
+//     }
+//     console.log(oneCanGetHelp)
+//     let used = []
+//     let counter = 0
+//     for (let i in oneCanGetHelp) {
+//         let temp = oneCanGetHelp[i].slice(0)
+//         let flag = 0
+//         while (temp.length !== 0) {
+//             if (!used.includes(temp[0])) {
+//                 used.push(temp[0])
+//                 flag = 1
+//                 break
+//             }
+//             temp.shift()
+//         }
+//         if (flag == 1) {
+//             counter++
+//         }
+//     }
+//     return possible + counter
+// }
 
-console.log(solution(7, [2, 4, 5, 6], [1, 3, 4, 5]))
+// console.log(solution(7, [2, 4, 5, 6], [1, 3, 4, 5]))
