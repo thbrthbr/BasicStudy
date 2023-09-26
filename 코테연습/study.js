@@ -1098,3 +1098,188 @@
 // }
 
 // console.log(solution(7, [2, 4, 5, 6], [1, 3, 4, 5]))
+// function solution(numbers, hand) {
+//     let mirotic = ''
+//     let leftPlace = [1, 4, 7]
+//     let rightPlace = [3, 6, 9]
+//     let centerPlace = [2, 5, 8, 0]
+//     let rightFinger = 10
+//     let leftFinger = 12
+//     let near2 = {
+//         1: 1,
+//         2: 0,
+//         3: 1,
+//         4: 2,
+//         5: 1,
+//         6: 2,
+//         7: 3,
+//         8: 2,
+//         9: 3,
+//         10: 4,
+//         0: 3,
+//         12: 4,
+//     }
+//     let near5 = {
+//         1: 2,
+//         2: 1,
+//         3: 2,
+//         4: 1,
+//         5: 0,
+//         6: 1,
+//         7: 2,
+//         8: 1,
+//         9: 2,
+//         10: 3,
+//         0: 2,
+//         12: 3,
+//     }
+//     let near8 = {
+//         1: 3,
+//         2: 2,
+//         3: 3,
+//         4: 2,
+//         5: 1,
+//         6: 2,
+//         7: 1,
+//         8: 0,
+//         9: 1,
+//         10: 2,
+//         0: 1,
+//         12: 2,
+//     }
+//     let near0 = {
+//         1: 4,
+//         2: 3,
+//         3: 4,
+//         4: 3,
+//         5: 2,
+//         6: 3,
+//         7: 2,
+//         8: 1,
+//         9: 2,
+//         10: 1,
+//         0: 0,
+//         12: 1,
+//     }
+//     for (let i = 0; i < numbers.length; i++) {
+//         if (leftPlace.includes(numbers[i])) {
+//             mirotic += 'L'
+//             leftFinger = numbers[i]
+//         } else if (rightPlace.includes(numbers[i])) {
+//             mirotic += 'R'
+//             rightFinger = numbers[i]
+//         } else {
+//             let lp = 0
+//             let rp = 0
+//             if (numbers[i] == 2) {
+//                 lp = near2[leftFinger]
+//                 rp = near2[rightFinger]
+//                 if (lp > rp) {
+//                     mirotic += 'R'
+//                     rightFinger = numbers[i]
+//                 } else if (lp < rp) {
+//                     mirotic += 'L'
+//                     leftFinger = numbers[i]
+//                 } else {
+//                     mirotic += hand[0].toUpperCase()
+//                     hand == 'right'
+//                         ? (rightFinger = numbers[i])
+//                         : (leftFinger = numbers[i])
+//                 }
+//             } else if (numbers[i] == 5) {
+//                 lp = near5[leftFinger]
+//                 rp = near5[rightFinger]
+//                 if (lp > rp) {
+//                     mirotic += 'R'
+//                     rightFinger = numbers[i]
+//                 } else if (lp < rp) {
+//                     mirotic += 'L'
+//                     leftFinger = numbers[i]
+//                 } else {
+//                     mirotic += hand[0].toUpperCase()
+//                     hand == 'right'
+//                         ? (rightFinger = numbers[i])
+//                         : (leftFinger = numbers[i])
+//                 }
+//             } else if (numbers[i] == 8) {
+//                 lp = near8[leftFinger]
+//                 rp = near8[rightFinger]
+//                 if (lp > rp) {
+//                     mirotic += 'R'
+//                     rightFinger = numbers[i]
+//                 } else if (lp < rp) {
+//                     mirotic += 'L'
+//                     leftFinger = numbers[i]
+//                 } else {
+//                     mirotic += hand[0].toUpperCase()
+//                     hand == 'right'
+//                         ? (rightFinger = numbers[i])
+//                         : (leftFinger = numbers[i])
+//                 }
+//             } else {
+//                 lp = near0[leftFinger]
+//                 rp = near0[rightFinger]
+//                 if (lp > rp) {
+//                     mirotic += 'R'
+//                     rightFinger = numbers[i]
+//                 } else if (lp < rp) {
+//                     mirotic += 'L'
+//                     leftFinger = numbers[i]
+//                 } else {
+//                     mirotic += hand[0].toUpperCase()
+//                     hand == 'right'
+//                         ? (rightFinger = numbers[i])
+//                         : (leftFinger = numbers[i])
+//                 }
+//             }
+//         }
+//     }
+//     return mirotic
+// }
+
+// console.log(solution([1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], 'right'))
+
+function solution(new_id) {
+    new_id = new_id.toLowerCase()
+    let possible = 'abcdefghijklmnopqrstuvwxyz1234567890-_.'
+    for (let i = 0; i < new_id.length; i++) {
+        if (!possible.split('').includes(new_id[i])) {
+            new_id = new_id.replace(new_id[i], ' ')
+        }
+    }
+    let str = ''
+    for (let i = 0; i < new_id.length; i++) {
+        if (new_id[i] == '.') {
+            str += '.'
+        } else {
+            if (str.length > 2) {
+                new_id = new_id.replace(str, ' '.repeat(str.length))
+                str = ''
+            } else {
+                str = ''
+            }
+        }
+    }
+    new_id = new_id.split(' ').join('')
+    new_id = new_id.replace('..', '.')
+    new_id = new_id.split('')
+    new_id.join('')
+    console.log(new_id)
+    while (new_id[0] == '.' || new_id[new_id.length - 1] == '.') {
+        if (new_id[0] == '.') new_id.shift()
+        if (new_id[new_id.length - 1] == '.') new_id.pop()
+        if (new_id.length < 3) {
+            if (new_id.length == 0) {
+                new_id.push('a')
+            }
+            while (new_id.length < 3) {
+                new_id.push(new_id[new_id.length - 1])
+            }
+        }
+        new_id = new_id.join('').slice(0, 15).split('')
+    }
+
+    return new_id.join('')
+}
+
+console.log(solution('..................'))
