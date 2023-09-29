@@ -1239,49 +1239,184 @@
 
 // console.log(solution([1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], 'right'))
 
-function solution(new_id) {
-    new_id = new_id.toLowerCase()
-    let possible = 'abcdefghijklmnopqrstuvwxyz1234567890-_.'
-    for (let i = 0; i < new_id.length; i++) {
-        if (!possible.split('').includes(new_id[i])) {
-            new_id = new_id.replace(new_id[i], ' ')
+// function solution(new_id) {
+//     new_id = new_id.toLowerCase()
+//     let possible = 'abcdefghijklmnopqrstuvwxyz1234567890-_.'
+//     for (let i = 0; i < new_id.length; i++) {
+//         if (!possible.split('').includes(new_id[i])) {
+//             new_id = new_id.replace(new_id[i], ' ')
+//         }
+//     }
+//     let str = ''
+//     for (let i = 0; i < new_id.length; i++) {
+//         if (new_id[i] == '.') {
+//             str += '.'
+//         } else {
+//             if (str.length > 2) {
+//                 new_id = new_id.replace(str, ' '.repeat(str.length))
+//                 str = ''
+//             } else {
+//                 str = ''
+//             }
+//         }
+//     }
+//     new_id = new_id.split(' ').join('')
+//     new_id = new_id.replace('..', '.')
+//     new_id = new_id.split('')
+//     new_id.join('')
+//     console.log(new_id)
+//     while (new_id[0] == '.' || new_id[new_id.length - 1] == '.') {
+//         if (new_id[0] == '.') new_id.shift()
+//         if (new_id[new_id.length - 1] == '.') new_id.pop()
+//         if (new_id.length < 3) {
+//             if (new_id.length == 0) {
+//                 new_id.push('a')
+//             }
+//             while (new_id.length < 3) {
+//                 new_id.push(new_id[new_id.length - 1])
+//             }
+//         }
+//         new_id = new_id.join('').slice(0, 15).split('')
+//     }
+
+//     return new_id.join('')
+// }
+
+// console.log(solution('..................'))
+//
+// //
+// function solution(n, info) {
+//     let start = []
+//     let minus = 10
+//     let peachScore = 0
+//     for (let i = 0; i < info.length; i++) {
+//         if (info[i] !== 0) {
+//             start.push(minus * info[i])
+//             peachScore += minus
+//         } else start.push(0)
+//         minus--
+//     }
+//     console.log(start)
+//     let winList = []
+//     let possible = []
+//     let himWin = 10
+//     let lionScore = 0
+//     for (let i = 0; i < start.length; i++) {
+//         let invest = 0
+//         let eachScore = 0
+//         let shot = 0
+//         while (start[i] >= eachScore) {
+//             if (n !== 0) {
+//                 invest++
+//                 n--
+//                 eachScore = himWin * invest
+//             } else {
+//                 break
+//             }
+//         }
+//         if (eachScore > start[i]) {
+//             possible.push(invest)
+//             lionScore += himWin
+//         }
+//         himWin--
+//     }
+//     console.log(possible)
+//     // for (let i = 0; i < start.length; i++) {
+//     //     let invest = 0
+//     //     let eachScore = 1
+//     //     while (start[i] >= invest) {
+//     //         if (n !== 0) {
+//     //             eachScore = invest * himWin
+//     //             invest++
+//     //             n--
+//     //         } else {
+//     //             break
+//     //         }
+//     //     }
+//     //     possible.push(eachScore)
+//     //     lionScore += eachScore
+//     //     if (n == 0) {
+//     //         if (lionScore > peachScore) {
+//     //             winList.push(possible)
+//     //         }
+//     //         break
+//     //     }
+//     // }
+// }
+// function solution(n, info) {
+//     let answer = Array(11).fill(0)
+//     let maxCount = 0
+
+//     function findMaxPoint(apeachCount, ryanCount, usedShots, point, arr) {
+//         if (n < usedShots) return // 사용한 화살의 수가 전체 화살수 보다 큰 경우
+
+//         if (point > 10) {
+//             // 10포인트까지 모든 경우를 탐색한 경우
+//             let diff = ryanCount - apeachCount
+//             if (maxCount < diff) {
+//                 // 포인트 차이가 maxCount보다 큰 경우
+//                 arr[10] = n - usedShots
+//                 maxCount = diff // 해당 포인트 차이를 maxCount에 저장
+//                 answer = arr // 해당 경우를 answer에 저장
+//             }
+//             return
+//         }
+
+//         if (n > usedShots) {
+//             // 라이언이 이겨 포인트를 얻는 경우
+//             let current = [...arr]
+//             current[10 - point] = info[10 - point] + 1
+//             findMaxPoint(
+//                 apeachCount,
+//                 ryanCount + point,
+//                 usedShots + info[10 - point] + 1,
+//                 point + 1,
+//                 current,
+//             )
+//         }
+
+//         if (info[10 - point] > 0) {
+//             // 어피치가 이겨 포인트를 얻는 경우
+//             findMaxPoint(
+//                 apeachCount + point,
+//                 ryanCount,
+//                 usedShots,
+//                 point + 1,
+//                 arr,
+//             )
+//         } else {
+//             // 둘다 점수를 얻지 못하는 경우
+//             findMaxPoint(apeachCount, ryanCount, usedShots, point + 1, arr)
+//         }
+//     }
+
+//     findMaxPoint(0, 0, 0, 0, answer) // 0포인트 부터 나올수 있는 모든 경우를 탐색한다
+
+//     return maxCount <= 0 ? [-1] : answer
+// }
+// const n = 5
+// const info = [2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+// const result = solution(n, info)
+// console.log(result)
+function generatePermutations(n) {
+    const permutations = []
+
+    function generate(currentPermutation, depth) {
+        if (depth === n) {
+            console.log(currentPermutation)
+            permutations.push([...currentPermutation]) // 현재 순열을 결과 배열에 추가합니다.
+            return
         }
-    }
-    let str = ''
-    for (let i = 0; i < new_id.length; i++) {
-        if (new_id[i] == '.') {
-            str += '.'
-        } else {
-            if (str.length > 2) {
-                new_id = new_id.replace(str, ' '.repeat(str.length))
-                str = ''
-            } else {
-                str = ''
-            }
+
+        for (let i = 0; i <= n; i++) {
+            currentPermutation[depth] = i
+            generate(currentPermutation, depth + 1)
         }
-    }
-    new_id = new_id.split(' ').join('')
-    new_id = new_id.replace('..', '.')
-    new_id = new_id.split('')
-    new_id.join('')
-    console.log(new_id)
-    while (new_id[0] == '.' || new_id[new_id.length - 1] == '.') {
-        if (new_id[0] == '.') new_id.shift()
-        if (new_id[new_id.length - 1] == '.') new_id.pop()
-        if (new_id.length < 3) {
-            if (new_id.length == 0) {
-                new_id.push('a')
-            }
-            while (new_id.length < 3) {
-                new_id.push(new_id[new_id.length - 1])
-            }
-        }
-        new_id = new_id.join('').slice(0, 15).split('')
     }
 
-    return new_id.join('')
+    generate([], 0)
+
+    return permutations
 }
 
-console.log(solution('..................'))
-//
-//
+console.log(generatePermutations(10))
