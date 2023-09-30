@@ -1402,8 +1402,8 @@ function generatePermutations(n) {
     const permutations = []
 
     function generate(currentPermutation, depth) {
+        console.log(currentPermutation)
         if (depth === n) {
-            console.log(currentPermutation)
             permutations.push([...currentPermutation]) // 현재 순열을 결과 배열에 추가합니다.
             return
         }
