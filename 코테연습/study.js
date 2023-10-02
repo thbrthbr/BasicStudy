@@ -337,28 +337,28 @@
 // console.log(solution([-1, -2, -5, -5]))
 
 // function solution(keyinput, board) {
-//     let start = [0, 0]
+//     let que[0] = [0, 0]
 //     for (let i = 0; i < keyinput.length; i++) {
 //         if (keyinput[i] == 'right') {
-//             if (Math.floor(board[0] / 2) >= start[0] + 1) {
-//                 start[0] = start[0] + 1
+//             if (Math.floor(board[0] / 2) >= que[0][0] + 1) {
+//                 que[0][0] = que[0][0] + 1
 //             }
 //         } else if (keyinput[i] == 'left') {
-//             if (-1 * Math.floor(board[0] / 2) <= start[0] - 1) {
-//                 start[0] = start[0] - 1
+//             if (-1 * Math.floor(board[0] / 2) <= que[0][0] - 1) {
+//                 que[0][0] = que[0][0] - 1
 //             }
 //         } else if (keyinput[i] == 'up') {
-//             if (Math.floor(board[1] / 2) >= start[1] + 1) {
-//                 start[1] = start[1] + 1
+//             if (Math.floor(board[1] / 2) >= que[0][1] + 1) {
+//                 que[0][1] = que[0][1] + 1
 //             }
 //         } else if (keyinput[i] == 'down') {
-//             if (-1 * Math.floor(board[1] / 2) <= start[1] - 1) {
-//                 start[1] = start[1] - 1
+//             if (-1 * Math.floor(board[1] / 2) <= que[0][1] - 1) {
+//                 que[0][1] = que[0][1] - 1
 //             }
 //         }
-//         console.log(start)
+//         console.log(que[0])
 //     }
-//     return start
+//     return que[0]
 // }
 
 // console.log(
@@ -914,10 +914,10 @@
 // function solution(n, m, section) {
 //     let sum = 0
 //     let area = []
-//     let start = section[0]
+//     let que[0] = section[0]
 //     while (section.length > 0) {
-//         area.push(start)
-//         start++
+//         area.push(que[0])
+//         que[0]++
 //         if (area.length == m) {
 //             let copy = section.length
 //             for (let i = 0; i < copy; i++) {
@@ -1286,26 +1286,26 @@
 //
 // //
 // function solution(n, info) {
-//     let start = []
+//     let que[0] = []
 //     let minus = 10
 //     let peachScore = 0
 //     for (let i = 0; i < info.length; i++) {
 //         if (info[i] !== 0) {
-//             start.push(minus * info[i])
+//             que[0].push(minus * info[i])
 //             peachScore += minus
-//         } else start.push(0)
+//         } else que[0].push(0)
 //         minus--
 //     }
-//     console.log(start)
+//     console.log(que[0])
 //     let winList = []
 //     let possible = []
 //     let himWin = 10
 //     let lionScore = 0
-//     for (let i = 0; i < start.length; i++) {
+//     for (let i = 0; i < que[0].length; i++) {
 //         let invest = 0
 //         let eachScore = 0
 //         let shot = 0
-//         while (start[i] >= eachScore) {
+//         while (que[0][i] >= eachScore) {
 //             if (n !== 0) {
 //                 invest++
 //                 n--
@@ -1314,17 +1314,17 @@
 //                 break
 //             }
 //         }
-//         if (eachScore > start[i]) {
+//         if (eachScore > que[0][i]) {
 //             possible.push(invest)
 //             lionScore += himWin
 //         }
 //         himWin--
 //     }
 //     console.log(possible)
-//     // for (let i = 0; i < start.length; i++) {
+//     // for (let i = 0; i < que[0].length; i++) {
 //     //     let invest = 0
 //     //     let eachScore = 1
-//     //     while (start[i] >= invest) {
+//     //     while (que[0][i] >= invest) {
 //     //         if (n !== 0) {
 //     //             eachScore = invest * himWin
 //     //             invest++
@@ -1398,25 +1398,116 @@
 // const info = [2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
 // const result = solution(n, info)
 // console.log(result)
-function generatePermutations(n) {
-    const permutations = []
+// function generatePermutations(n) {
+//     const permutations = []
 
-    function generate(currentPermutation, depth) {
-        console.log(currentPermutation)
-        if (depth === n) {
-            permutations.push([...currentPermutation]) // 현재 순열을 결과 배열에 추가합니다.
-            return
-        }
+//     function generate(currentPermutation, depth) {
+//         console.log(currentPermutation)
+//         if (depth === n) {
+//             permutations.push([...currentPermutation]) // 현재 순열을 결과 배열에 추가합니다.
+//             return
+//         }
 
-        for (let i = 0; i <= n; i++) {
-            currentPermutation[depth] = i
-            generate(currentPermutation, depth + 1)
+//         for (let i = 0; i <= n; i++) {
+//             currentPermutation[depth] = i
+//             generate(currentPermutation, depth + 1)
+//         }
+//     }
+
+//     generate([], 0)
+
+//     return permutations
+// }
+
+// console.log(generatePermutations(10))
+// const solution = (n) => {
+//     let array = []
+//     const sorting = (depth, eachArray) => {
+//         if (depth === n) {
+//             array.push(eachArray)
+//             return
+//         }
+//         for (let i = 1; i <= 5; i++) {
+//             if (!eachArray.includes(i)) {
+//                 const newArray = [...eachArray]
+//                 newArray.push(i)
+//                 sorting(depth + 1, newArray)
+//             }
+//         }
+//     }
+//     sorting(0, [])
+//     return array
+// }
+
+// console.log(solution(5))
+
+// []
+// function solution(m, n, puddles) {
+//     let arr = []
+//     let que = [[1, 1, 0]]
+//     let sorted = []
+//     for (let i = 0; i < puddles.length; i++) {
+//         sorted.push(puddles[i].join(''))
+//     }
+//     console.log(sorted)
+//     while (que.length !== 0) {
+//         let copy = [...que]
+//         let copy2 = [...que]
+//         if (
+//             !sorted.includes([copy[0][0] + 1, copy[0][1]].join('')) &&
+//             copy[0][0] + 1 <= n
+//         ) {
+//             que.push([copy[0][0] + 1, copy[0][1], copy[0][2] + 1])
+//             arr.push([copy[0][0] + 1, copy[0][1], copy[0][2] + 1])
+//         }
+//         if (
+//             !sorted.includes([copy2[0][0], copy2[0][1] + 1].join('')) &&
+//             copy2[0][1] + 1 <= m
+//         ) {
+//             que.push([copy2[0][0], copy2[0][1] + 1, copy2[0][2] + 1])
+//             arr.push([copy2[0][0], copy2[0][1] + 1, copy2[0][2] + 1])
+//         }
+//         console.log(que)
+//         que.shift()
+//     }
+//     let maxX = 0
+//     let maxY = 0
+//     let min = Infinity
+//     let count = 0
+//     for (let i = 0; i < arr.length; i++) {
+//         if (arr[i][0] > maxX || arr[i][1] > maxY) {
+//             maxX = arr[i][0]
+//             maxY = arr[i][1]
+//             count = 1
+//             min = arr[i][2]
+//         } else if (arr[i][0] == maxX && arr[i][1] == maxY) {
+//             if (arr[i][2] == min) {
+//                 count++
+//             } else if (arr[i][2] < min) {
+//                 count = 1
+//             }
+//         }
+//     }
+//     return count
+// }
+
+// console.log(solution(5, 6, [[2, 2]]))
+function solution(m, n, puddles) {
+    const MOD = 1000000007
+    const dp = Array.from({ length: n + 1 }, () => Array(m + 1).fill(0))
+
+    dp[1][1] = 1
+
+    for (let i = 1; i <= n; i++) {
+        for (let j = 1; j <= m; j++) {
+            if (i === 1 && j === 1) continue
+            if (puddles.some((puddle) => puddle[0] === j && puddle[1] === i)) {
+                dp[i][j] = 0
+            } else {
+                dp[i][j] = (dp[i - 1][j] + dp[i][j - 1]) % MOD
+            }
         }
     }
 
-    generate([], 0)
-
-    return permutations
+    return dp[n][m]
 }
-
-console.log(generatePermutations(10))
