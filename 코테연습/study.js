@@ -1492,32 +1492,172 @@
 // }
 
 // console.log(solution(5, 6, [[2, 2]]))
-function solution(m, n, puddles) {
-    const MOD = 1000000007
-    const dp = Array.from({ length: n + 1 }, () => Array(m + 1).fill(0))
+// function solution(m, n, puddles) {
+//     const MOD = 1000000007
+//     const dp = Array.from({ length: n + 1 }, () => Array(m + 1).fill(0))
 
-    dp[1][1] = 1
+//     dp[1][1] = 1
 
-    for (let i = 1; i <= n; i++) {
-        for (let j = 1; j <= m; j++) {
-            if (i === 1 && j === 1) continue
-            if (puddles.some((puddle) => puddle[0] === j && puddle[1] === i)) {
-                dp[i][j] = 0
-            } else {
-                dp[i][j] = (dp[i - 1][j] + dp[i][j - 1]) % MOD
-            }
+//     for (let i = 1; i <= n; i++) {
+//         for (let j = 1; j <= m; j++) {
+//             if (i === 1 && j === 1) continue
+//             if (puddles.some((puddle) => puddle[0] === j && puddle[1] === i)) {
+//                 dp[i][j] = 0
+//             } else {
+//                 dp[i][j] = (dp[i - 1][j] + dp[i][j - 1]) % MOD
+//             }
+//         }
+//     }
+
+//     return dp[n][m]
+// }
+
+// function solution(new_id) {
+//     new_id = new_id.toLowerCase()
+//     let possible = 'abcdefghijklmnopqrstuvwxyz1234567890-_.'
+// for (let i = 0; i < new_id.length; i++) {
+//     if (!possible.split('').includes(new_id[i])) {
+//         new_id = new_id.replace(new_id[i], ' ')
+//     }
+// }
+//     let str = ''
+//     for (let i = 0; i < new_id.length; i++) {
+//         if (new_id[i] == '.') {
+//             str += '.'
+//         } else {
+//             if (str.length > 2) {
+//                 new_id = new_id.replace(str, ' '.repeat(str.length))
+//                 str = ''
+//             } else {
+//                 str = ''
+//             }
+//         }
+//     }
+//     new_id = new_id.split(' ').join('')
+//     new_id = new_id.replace('..', '.')
+//     new_id = new_id.split('')
+//     while (new_id[0] == '.' || new_id[new_id.length - 1] == '.') {
+//         if (new_id[0] == '.') new_id.shift()
+//         if (new_id[new_id.length - 1] == '.') new_id.pop()
+//     }
+//     if (new_id.length < 3) {
+//         if (new_id.length == 0) {
+//             new_id.push('a')
+//         }
+//         while (new_id.length < 3) {
+//             new_id.push(new_id[new_id.length - 1])
+//         }
+//     }
+//     new_id = new_id.join('').slice(0, 15).split('')
+//     while (new_id[0] == '.' || new_id[new_id.length - 1] == '.') {
+//         if (new_id[0] == '.') new_id.shift()
+//         if (new_id[new_id.length - 1] == '.') new_id.pop()
+//     }
+//     if (new_id.length < 3) {
+//         if (new_id.length == 0) {
+//             new_id.push('a')
+//         }
+//         while (new_id.length < 3) {
+//             new_id.push(new_id[new_id.length - 1])
+//         }
+//     }
+//     return new_id.join('')
+// }
+
+// function solution(new_id) {
+//     //1단계
+//     new_id = new_id.toLowerCase()
+//     let possible = 'abcdefghijklmnopqrstuvwxyz1234567890-_.'
+//     //2단계
+//     for (let i = 0; i < new_id.length; i++) {
+//         if (!possible.includes(new_id[i])) {
+//             new_id = new_id.replace(new_id[i], ' ')
+//         }
+//     }
+//     new_id = new_id.split(' ').join('')
+//     //3단계
+//     let str = ''
+//     let flag = false
+//     for (let i = 0; i < new_id.length; i++) {
+//         if (new_id[i] == '.' && flag == false) {
+//             str += new_id[i]
+//             flag = true
+//         } else {
+//             if (new_id[i] !== '.') {
+//                 str += new_id[i]
+//                 flag = false
+//             }
+//         }
+//     }
+//     new_id = str
+//     //4~7단계
+//     let bool = false
+//     while (bool == false) {
+//         bool = true
+//         //4단계
+//         if (new_id[0] == '.') {
+//             new_id = new_id.split('')
+//             new_id.shift()
+//             new_id = new_id.join('')
+//             bool = false
+//         }
+//         if (new_id[new_id.length - 1] == '.') {
+//             new_id = new_id.split('')
+//             new_id.pop()
+//             new_id = new_id.join('')
+//             bool = false
+//         }
+//         //5단계
+//         if (new_id.length <= 0) {
+//             new_id += 'a'
+//             bool = false
+//         }
+//         //6단계
+//         if (new_id.length >= 16) {
+//             new_id = new_id.split('').splice(0, 15)
+//             new_id = new_id.join('')
+//             bool = false
+//         }
+//         //7단계
+//         if (new_id.length <= 2) {
+//             new_id += new_id[new_id.length - 1]
+//             bool = false
+//         }
+//     }
+//     return new_id
+// }
+
+// let arr = [
+//     ['...!@BaT#*..y.abcdefghijklm', 'bat.y.abcdefghi'],
+//     ['z-+.^.', 'z--'],
+//     ['=.=', 'aaa'],
+//     ['123_.def', '123_.def'],
+//     ['abcde..f..g..hi..j.k', 'abcdefghijklmn'],
+//     ['..............', 'aaa'],
+//     ['', 'aaa'],
+//     ['a', 'a'],
+//     ['1', '1'],
+//     ['1a', '1a'],
+// ]
+// for (let i = 0; i < arr.length; i++) {
+//     console.log(solution(arr[i][0]))
+// }
+
+function solution(ingredient) {
+    let count = 0
+    let save = 0
+    let flag = false
+    for (let i = 0; i < ingredient.length; i++) {
+        if (
+            ingredient[i] == '1' &&
+            ingredient[i - 1] == '3' &&
+            ingredient[i - 2] == '2' &&
+            ingredient[i - 3] == '1'
+        ) {
+            ingredient.splice(i - 3, 4)
+            i = i - 4
+            count++
         }
     }
-
-    return dp[n][m]
+    return count
 }
-
-// 프로그래머스의 "등굣길" 문제는 동적 프로그래밍(Dynamic Programming)을 사용하여 해결할 수 있는 대표적인 알고리즘 문제 중 하나입니다. 이 문제는 주어진 격자 맵에서 (1, 1) 지점에서 시작하여 (m, n) 지점까지 이동하는 방법의 수를 구하는 문제입니다. 단, 이동은 오른쪽 또는 아래쪽으로만 가능하며, 장애물이 있는 칸은 지나갈 수 없습니다.
-
-// 문제 해결을 위한 주요 아이디어는 다음과 같습니다:
-
-// 동적 프로그래밍 테이블(dp 배열)을 사용하여 각 칸까지의 이동 방법의 수를 저장합니다.
-// (1, 1) 지점은 출발점이므로 dp[1][1]을 1로 초기화합니다.
-// 각 칸에 도달할 때마다 왼쪽 칸(dp[i][j-1])과 위쪽 칸(dp[i-1][j])으로부터의 이동 방법의 수를 더하여 현재 칸(dp[i][j])까지의 이동 방법의 수를 갱신합니다.
-// 최종적으로 dp[m][n]에 도착 지점까지의 이동 방법의 수가 저장됩니다.
-// 아래는 JavaScript로 구현한 "등굣길" 문제의 예시 코드입니다:
