@@ -1643,21 +1643,111 @@
 //     console.log(solution(arr[i][0]))
 // }
 
-function solution(ingredient) {
-    let count = 0
-    let save = 0
-    let flag = false
-    for (let i = 0; i < ingredient.length; i++) {
-        if (
-            ingredient[i] == '1' &&
-            ingredient[i - 1] == '3' &&
-            ingredient[i - 2] == '2' &&
-            ingredient[i - 3] == '1'
-        ) {
-            ingredient.splice(i - 3, 4)
-            i = i - 4
-            count++
-        }
-    }
-    return count
-}
+// function solution(ingredient) {
+//     let count = 0
+//     let save = 0
+//     let flag = false
+//     for (let i = 0; i < ingredient.length; i++) {
+//         if (
+//             ingredient[i] == '1' &&
+//             ingredient[i - 1] == '3' &&
+//             ingredient[i - 2] == '2' &&
+//             ingredient[i - 3] == '1'
+//         ) {
+//             ingredient.splice(i - 3, 4)
+//             i = i - 4
+//             count++
+//         }
+//     }
+//     return count
+// }
+
+// function solution(today, terms, privacies) {
+//     var answer = []
+//     let obj = {}
+//     let month = today[5] + today[6]
+//     let sorted = terms.map((x) => x.split(' '))
+//     for (let i = 0; i < sorted.length; i++) {
+//         let thisMonth = +month + +sorted[i][1]
+//         if (thisMonth > 12) {
+//             thisMonth = thisMonth % 12
+//             let date = today
+//             date = date.split('.')
+//             date[0] = +date[0] + 1
+//             date[1] = thisMonth
+//             obj[terms[i][0]] = date.join('.')
+//         } else {
+//             thisMonth = thisMonth % 12
+//             let date = today
+//             date = date.split('.')
+//             date[1] = thisMonth
+//             obj[terms[i][0]] = date.join('.')
+//         }
+//     }
+//     console.log(obj)
+//     for (let i = 0; i < privacies.length; i++) {
+//         let dateArr = privacies[i].split(' ')
+//         let compare = obj[dateArr[1]]
+//         if (+compare.split('.')[0] < +dateArr[0].split('.')[0]) {
+//             result.push(i + 1)
+//             continue
+//         }
+//         if (+compare.split('.')[1] < +dateArr[0].split('.')[1]) {
+//             result.push(i + 1)
+//             continue
+//         }
+//         if (+compare.split('.')[1] < +dateArr[0].split('.')[1]) {
+//             result.push(i + 1)
+//             continue
+//         }
+//     }
+// }
+
+// function solution(today, terms, privacies) {
+//     let answer = []
+//     let obj = {}
+//     let sorted = today.split('.')
+//     for (let i = 0; i < terms.length; i++) {
+//         let sp = terms[i].split(' ')
+//         obj[sp[0]] = sp[1]
+//     }
+//     for (let i = 0; i < privacies.length; i++) {
+//         let dateDataArr = privacies[i].split(' ')z
+//         let dateArr = dateDataArr[0].split('.')
+//         dateArr[1] = +dateArr[1] + +obj[dateDataArr[1]]
+//         if (dateArr[1] > 12) {
+//             dateArr[0] = +dateArr[0] + Math.ceil(dateArr[1] / 12) - 1
+//             dateArr[1] = dateArr[1] % 12 == 0 ? 12 : dateArr[1] % 12
+//         }
+//         if (+dateArr[2] == 1) {
+//             if (+dateArr[1] == 1) {
+//                 dateArr[2] = 28
+//                 dateArr[1] = 12
+//                 dateArr[0] = +dateArr[0] - 1
+//             } else {
+//                 dateArr[2] = 28
+//                 dateArr[1] = +dateArr[1] - 1
+//             }
+//         } else {
+//             dateArr[2] = +dateArr[2] - 1
+//         }
+//         if (+dateArr[0] > +sorted[0]) {
+//             continue
+//         } else if (+dateArr[0] == +sorted[0]) {
+//             if (+dateArr[1] > +sorted[1]) {
+//                 continue
+//             } else if (+dateArr[1] == +sorted[1]) {
+//                 if (+dateArr[2] < +sorted[2]) {
+//                     answer.push(i + 1)
+//                 }
+//             } else {
+//                 answer.push(i + 1)
+//             }
+//         } else {
+//             answer.push(i + 1)
+//         }
+//     }
+//     return answer.sort((x, y) => x - y)
+// }
+
+// console.log(solution('2020.12.17', ['A 12'], ['2010.01.01 A', '2019.12.17 A']))
