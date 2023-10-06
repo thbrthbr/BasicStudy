@@ -1751,3 +1751,91 @@
 // }
 
 // console.log(solution('2020.12.17', ['A 12'], ['2010.01.01 A', '2019.12.17 A']))
+// function solution(park, routes) {
+//     let dog = []
+//     for (let i = 0; i < park.length; i++) {
+//         for (let j = 0; j < park[i].length; j++) {
+//             if (park[i][j] == 'S') {
+//                 dog = [i, j]
+//             }
+//         }
+//     }
+//     console.log(dog)
+//     for (let i = 0; i < routes.length; i++) {
+//         let go = routes[i].split(' ')
+//         let movement = +go[1]
+//         if (go[0] == 'E') {
+//             if (dog[1] + movement <= park.length - 1) {
+//                 let arrive = park[dog[0]][dog[1] + movement]
+//                 if (arrive) {
+//                     let ok = true
+//                     for (let j = 1; j <= movement; j++) {
+//                         if (park[dog[0]][dog[1] + j] == 'X') {
+//                             ok = false
+//                             break
+//                         }
+//                     }
+//                     if (ok) dog = [dog[0], dog[1] + movement]
+//                 }
+//             }
+//         }
+//         if (go[0] == 'S') {
+//             if (dog[0] + movement <= park.length - 1) {
+//                 let arrive = park[dog[0] + movement][dog[1]]
+//                 if (arrive) {
+//                     let ok = true
+//                     for (let j = 1; j <= movement; j++) {
+//                         if (park[dog[0] + j][dog[1]] == 'X') {
+//                             ok = false
+//                             break
+//                         }
+//                     }
+//                     if (ok) dog = [dog[0] + movement, dog[1]]
+//                 }
+//             }
+//         }
+//         if (go[0] == 'W') {
+//             if (dog[1] - movement >= 0) {
+//                 let arrive = park[dog[0]][dog[1] - movement]
+//                 if (arrive) {
+//                     let ok = true
+//                     for (let j = 1; j <= movement; j++) {
+//                         if (park[dog[0]][dog[1] - j] == 'X') {
+//                             ok = false
+//                             break
+//                         }
+//                     }
+//                     if (ok) dog = [dog[0], dog[1] - movement]
+//                 }
+//             }
+//         }
+//         if (go[0] == 'N') {
+//             if (dog[0] - movement >= 0) {
+//                 let arrive = park[dog[0] - movement][dog[1]]
+//                 if (arrive) {
+//                     let ok = true
+//                     for (let j = 1; j <= movement; j++) {
+//                         if (park[dog[0] - j][dog[1]] == 'X') {
+//                             ok = false
+//                             break
+//                         }
+//                     }
+//                     if (ok) dog = [dog[0] - movement, dog[1]]
+//                 }
+//             }
+//         }
+//     }
+//     return dog
+// }
+
+// console.log(solution(['OXXO', 'XSXO', 'XXXX'], ['E 1', 'S 1']))
+function solution(s) {
+    s = s.split(' ').filter((x) => x.length > 0)
+    for (let i = 0; i < s.length; i++) {
+        s[i] = s[i].toLowerCase()
+        s[i] = s[i][0].toUpperCase() + s[i].slice(1)
+    }
+    return s.join(' ')
+}
+
+console.log(solution('3people    -- or'))
