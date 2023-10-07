@@ -1839,3 +1839,4 @@ function solution(s) {
 }
 
 console.log(solution('3people    -- or'))
+//
