@@ -1829,15 +1829,46 @@
 // }
 
 // console.log(solution(['OXXO', 'XSXO', 'XXXX'], ['E 1', 'S 1']))
-function solution(s) {
-    s = s.split(' ').filter((x) => x.length > 0)
-    for (let i = 0; i < s.length; i++) {
-        s[i] = s[i].toLowerCase()
-        s[i] = s[i][0].toUpperCase() + s[i].slice(1)
-    }
-    return s.join(' ')
-}
+// function solution(s) {
+//     s = s.split(' ').filter((x) => x.length > 0)
+//     for (let i = 0; i < s.length; i++) {
+//         s[i] = s[i].toLowerCase()
+//         s[i] = s[i][0].toUpperCase() + s[i].slice(1)
+//     }
+//     return s.join(' ')
+// }
 
-console.log(solution('3people    -- or'))
+// console.log(solution('3people    -- or'))
 //
 //
+// function solution(s) {
+//     let zeroCount = 0
+//     let count = 0
+//     let str = ''
+//     while (s !== '1') {
+//         for (let i = 0; i < s.length; i++) {
+//             if (s[i] == '0') zeroCount++
+//             else str += s[i]
+//         }
+//         s = str.length.toString(2)
+//         str = ''
+//         count++
+//     }
+//     return [count, zeroCount]
+// }
+
+// console.log(solution('1111111'))
+function solution(n) {
+    let count = 0
+    for (let i = 1; i <= n; i++) {
+        let sum = 0
+        for (let j = i; j <= n; j++) {
+            sum += j
+            if (sum == n) {
+                count++
+                break
+            }
+        }
+    }
+    return count
+}
