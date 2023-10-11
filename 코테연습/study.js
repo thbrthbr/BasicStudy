@@ -1858,17 +1858,32 @@
 // }
 
 // console.log(solution('1111111'))
-function solution(n) {
-    let count = 0
-    for (let i = 1; i <= n; i++) {
-        let sum = 0
-        for (let j = i; j <= n; j++) {
-            sum += j
-            if (sum == n) {
-                count++
-                break
-            }
+// function solution(n) {
+//     let count = 0
+//     for (let i = 1; i <= n; i++) {
+//         let sum = 0
+//         for (let j = i; j <= n; j++) {
+//             sum += j
+//             if (sum == n) {
+//                 count++
+//                 break
+//             }
+//         }
+//     }
+//     return count
+// }
+function solution(numbers, target) {
+    var answer = 0
+    const recursive = (sum, count) => {
+        if (count === numbers.length) {
+            if (sum === target) answer++
+            return
         }
+        recursive(sum + numbers[count], count + 1)
+        recursive(sum - numbers[count], count + 1)
     }
-    return count
+    recursive(0, 0)
+    return answer
 }
+
+console.log(solution([4, 1, 2, 1], 4))
