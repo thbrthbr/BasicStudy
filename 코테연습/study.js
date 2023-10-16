@@ -1888,6 +1888,3 @@ function solution(numbers, target) {
 
 console.log(solution([4, 1, 2, 1], 4))
 //
-//
-//
-//
