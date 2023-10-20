@@ -1872,20 +1872,59 @@
 //     }
 //     return count
 // }
-function solution(numbers, target) {
-    var answer = 0
-    const recursive = (sum, count) => {
-        if (count === numbers.length) {
-            if (sum === target) answer++
-            return
+// function solution(numbers, target) {
+//     var answer = 0
+//     const recursive = (sum, count) => {
+//         if (count === numbers.length) {
+//             if (sum === target) answer++
+//             return
+//         }
+//         recursive(sum + numbers[count], count + 1)
+//         recursive(sum - numbers[count], count + 1)
+//     }
+//     recursive(0, 0)
+//     return answer
+// }
+
+// console.log(solution([4, 1, 2, 1], 4))
+//
+//
+function solution(maps) {
+    let opponent = [maps.length - 1, maps[0].length - 1]
+    let road = []
+    let copy = maps.map((v) => [...v])
+    const recursive = (cp, count, map) => {
+        let copied = map.map((v) => [...v])
+        copied[cp[0]][cp[1]] = 0
+        if (cp[0] == opponent[0] && cp[1] == opponent[1]) {
+            road.push(count + 1)
+            return 0
         }
-        recursive(sum + numbers[count], count + 1)
-        recursive(sum - numbers[count], count + 1)
+        if (copied[cp[0] + 1] && copied[cp[0] + 1][cp[1]] !== 0) {
+            recursive([cp[0] + 1, cp[1]], count + 1, copied)
+        }
+        if (copied[cp[0]][cp[1] + 1] && copied[cp[0]][cp[1] + 1] !== 0) {
+            recursive([cp[0], cp[1] + 1], count + 1, copied)
+        }
+        if (copied[cp[0]][cp[1] - 1] && copied[cp[0]][cp[1] - 1] !== 0) {
+            recursive([cp[0], cp[1] - 1], count + 1, copied)
+        }
+        if (copied[cp[0] - 1] && copied[cp[0] - 1][cp[1]] !== 0) {
+            recursive([cp[0] - 1, cp[1]], count + 1, copied)
+        }
+        return false
     }
-    recursive(0, 0)
-    return answer
+    recursive([0, 0], 0, copy)
+    return road.length > 0 ? Math.min(...road) : -1
 }
 
-console.log(solution([4, 1, 2, 1], 4))
-//
+console.log(
+    solution([
+        [1, 0, 1, 1, 1],
+        [1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1],
+        [1, 1, 1, 0, 1],
+    ]),
+)
 //
