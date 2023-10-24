@@ -1889,44 +1889,133 @@
 // console.log(solution([4, 1, 2, 1], 4))
 //
 //
-function solution(maps) {
-    let opponent = [maps.length - 1, maps[0].length - 1]
-    let road = []
-    let copy = maps.map((v) => [...v])
-    const recursive = (cp, count, map) => {
-        let copied = map.map((v) => [...v])
-        copied[cp[0]][cp[1]] = 0
-        if (cp[0] == opponent[0] && cp[1] == opponent[1]) {
-            road.push(count + 1)
-            return 0
-        }
-        if (copied[cp[0] + 1] && copied[cp[0] + 1][cp[1]] !== 0) {
-            recursive([cp[0] + 1, cp[1]], count + 1, copied)
-        }
-        if (copied[cp[0]][cp[1] + 1] && copied[cp[0]][cp[1] + 1] !== 0) {
-            recursive([cp[0], cp[1] + 1], count + 1, copied)
-        }
-        if (copied[cp[0]][cp[1] - 1] && copied[cp[0]][cp[1] - 1] !== 0) {
-            recursive([cp[0], cp[1] - 1], count + 1, copied)
-        }
-        if (copied[cp[0] - 1] && copied[cp[0] - 1][cp[1]] !== 0) {
-            recursive([cp[0] - 1, cp[1]], count + 1, copied)
-        }
-        return false
-    }
-    recursive([0, 0], 0, copy)
-    return road.length > 0 ? Math.min(...road) : -1
-}
+// function solution(maps) {
+//     let opponent = [maps.length - 1, maps[0].length - 1]
+//     let road = []
+//     let copy = maps.map((v) => [...v])
+//     const recursive = (cp, count, map) => {
+//         let copied = map.map((v) => [...v])
+//         copied[cp[0]][cp[1]] = 0
+//         if (cp[0] == opponent[0] && cp[1] == opponent[1]) {
+//             road.push(count + 1)
+//             return 0
+//         }
+//         if (copied[cp[0] + 1] && copied[cp[0] + 1][cp[1]] !== 0) {
+//             recursive([cp[0] + 1, cp[1]], count + 1, copied)
+//         }
+//         if (copied[cp[0]][cp[1] + 1] && copied[cp[0]][cp[1] + 1] !== 0) {
+//             recursive([cp[0], cp[1] + 1], count + 1, copied)
+//         }
+//         if (copied[cp[0]][cp[1] - 1] && copied[cp[0]][cp[1] - 1] !== 0) {
+//             recursive([cp[0], cp[1] - 1], count + 1, copied)
+//         }
+//         if (copied[cp[0] - 1] && copied[cp[0] - 1][cp[1]] !== 0) {
+//             recursive([cp[0] - 1, cp[1]], count + 1, copied)
+//         }
+//         return false
+//     }
+//     recursive([0, 0], 0, copy)
+//     return road.length > 0 ? Math.min(...road) : -1
+// }
 
-console.log(
-    solution([
-        [1, 0, 1, 1, 1],
-        [1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 1],
-        [1, 1, 1, 0, 1],
-    ]),
-)
+// console.log(
+//     solution([
+//         [1, 0, 1, 1, 1],
+//         [1, 0, 1, 0, 1],
+//         [1, 0, 1, 0, 1],
+//         [1, 0, 1, 0, 1],
+//         [1, 1, 1, 0, 1],
+//     ]),
+// )
 //
 //
 //
+// function solution(n) {
+//     let prev = 0
+//     let cur = 1
+//     for (let i = 2; i <= n; i++) {
+//         let temp = cur
+//         cur = (prev + cur) % 1234567
+//         prev = temp
+//     }
+//     return cur
+// }
+// console.log(solution(100))
+// function solution(s) {
+//     s = s.split('')
+//     let store = []
+//     for (let i = 1; i < s.length; i++) {
+//         if (s[i] == s[i - 1]) {
+//             store.pop()
+//             s = store.concat(s.slice(i + 1))
+//             store = []
+//             i = 1
+//         } else {
+//             store.push(s[i])
+//         }
+//     }
+//     if (s.length > 0) return 0
+//     else return 1
+// }
+// console.log(solution('baaaabaaaa'))
+// function solution(s) {
+//     s = s.split('')
+//     for (let i = 1; i < s.length; i++) {
+//         if (s[i] == s[i - 1]) {
+//             s.splice(i - 1, 2)
+//             console.log(s)
+//             i = i - 2
+//         }
+//     }
+//     if (s.length > 0) return 0
+//     else return 1
+// }
+// function solution(s) {
+//     const stack = []
+//     for (let i = 0; i < s.length; i++) {
+//         if (!stack.length || stack[stack.length - 1] !== s[i]) stack.push(s[i])
+//         else stack.pop()
+//     }
+//     return stack.length ? 0 : 1
+// }
+
+// console.log(solution('baabaa'))
+// function solution(brown, yellow) {
+//     let shrink = 0
+//     for (let i = 3; i <= brown / 2 - 1; i++) {
+//         let sero = shrink + 1
+//         if (sero * (brown / 2 - 3 - shrink) == yellow) {
+//             return [brown / 2 - 1 - shrink, sero + 2]
+//         }
+//         shrink++
+//     }
+// }
+// console.log(solution(24, 24))
+// function solution(n, words) {
+//     let used = [];
+//     let order = {};
+//     let count = 0;
+//     for(let i = 0; i < words.length; i++){
+//         if(order[i%n + 1]){
+//             order[i%n + 1] = [...order[i%n + 1], words[i]]
+//         }
+//         else{
+//             order[i%n + 1] = [words[i]]
+//         }
+//     }
+//     for(let i = 0; i < order["1"].length; i++){
+//         for(let j in order){
+//             if(used.includes(j[i])){
+//                 if(used[used.length - 1][used[used.length - 1].length - 1] !== ){
+
+//                    }
+//                 else{
+// used.push(j[i])
+//                 }
+//             }else{
+//                 return [+j, i]
+//             }
+//         }
+//     }
+//     return [0, 0]
+// }
