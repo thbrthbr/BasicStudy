@@ -2023,3 +2023,43 @@
 //
 //
 //
+// const outer1 = () => {
+//     const x = 10
+//     const inner1 = () => {
+//         console.log(x)
+//     }
+//     inner1()
+// }
+
+// const inner2 = () => {
+//     console.log(x)
+// }
+
+// const outer2 = () => {
+//     let x = 10
+//     inner2()
+// }
+// outer1()
+// outer2()
+
+// 클로저 개념 요약
+const outer3 = () => {
+    let x = 10
+    const inner3 = () => {
+        console.log(x)
+    }
+    return inner3
+}
+
+// 이게 클로저임
+let closure = outer3()
+closure()
+
+// outer3의 반환값으로서 outer3의 내부함수인 inner3이 반환됨
+// inner3은 같은 스코프에 존재했던 outer3의 지역변수인 x를 참조하여 출력하는 함수임
+// 그런데 outer3의 결과값으로 반환된 inner3만 따로 변수에 할당해준 뒤 호출하게 되면
+// 언뜻 보았을 때 outer3는 참조할 x가 존재하지 않는 것 같지만 제대로 x를 출력한다
+// 이게 왜 가능하지? 이게 javascript의 클로저 개념의 함수이기 때문
+// 클로저는 반환된 내부함수가 자신이 선언됐을 때의 환경(렉시컬 환경)인 스코프를 기억하여
+// 자신이 선언됐을 때의 환경 밖에서 호출되어도 그 환경에 접근할 수 있는 함수이다
+// 즉 요약하면 클로저는 자신이 생성될 때의 환경을 기억하는 함수다
