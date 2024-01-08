@@ -2068,18 +2068,61 @@ closure()
 //
 //
 
-function solution(phone_book) {
-    phone_book.sort()
-    console.log(phone_book.sort())
-    for (let i = 0; i < phone_book.length - 1; i++) {
-        console.log(phone_book[i + 1].slice(0, phone_book[i].length))
-        if (
-            phone_book[i] === phone_book[i + 1].slice(0, phone_book[i].length)
-        ) {
-            return false
-        }
-    }
-    return true
-}
+// function solution(phone_book) {
+//     phone_book.sort()
+//     console.log(phone_book.sort())
+//     for (let i = 0; i < phone_book.length - 1; i++) {
+//         console.log(phone_book[i + 1].slice(0, phone_book[i].length))
+//         if (
+//             phone_book[i] === phone_book[i + 1].slice(0, phone_book[i].length)
+//         ) {
+//             return false
+//         }
+//     }
+//     return true
+// }
 
-console.log(solution(['123', '21']))
+// console.log(solution(['123', '21']))
+
+// function solution(progresses, speeds) {
+//     let done = [];
+//     let tasks = [];
+//     for(let i = 0; i < progresses.length; i++){
+//         tasks.push({
+//             prg : progresses[i],
+//             speed : speeds[i]
+//         })
+//     }
+//     while(tasks.length > 0){
+//         let count = 0;
+//         for(let i = 0; i < tasks.length; i++){
+//             tasks[i].prg += tasks[i].speed;
+//             if(tasks[0].prg >= 100) {
+//                 count++;
+//                 tasks.shift();
+//                 i -= 1;
+//             }
+//         }
+//         if(count > 0) done.push(count);
+//     }
+//     return done;
+// }
+
+// function solution(progresses, speeds) {
+//     let done = []
+//     while (progresses.length > 0) {
+//         let count = 0
+//         for (let i = 0; i < progresses.length; i++) {
+//             progresses[i] += speeds[i]
+//             if (progresses[0] >= 100) {
+//                 count++
+//                 progresses.shift()
+//                 speeds.shift()
+//                 i -= 1
+//             }
+//         }
+//         if (count > 0) done.push(count)
+//     }
+//     return done
+// }
+//
