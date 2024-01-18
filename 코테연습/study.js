@@ -2043,17 +2043,17 @@
 // outer2()
 
 // 클로저 개념 요약
-const outer3 = () => {
-    let x = 10
-    const inner3 = () => {
-        console.log(x)
-    }
-    return inner3
-}
+// const outer3 = () => {
+//     let x = 10
+//     const inner3 = () => {
+//         console.log(x)
+//     }
+//     return inner3
+// }
 
-// 이게 클로저임
-let closure = outer3()
-closure()
+// // 이게 클로저임
+// let closure = outer3()
+// closure()
 
 // outer3의 반환값으로서 outer3의 내부함수인 inner3이 반환됨
 // inner3은 같은 스코프에 존재했던 outer3의 지역변수인 x를 참조하여 출력하는 함수임
@@ -2131,3 +2131,194 @@ closure()
 //
 //
 //
+
+// function solution(numbers) {
+//     let max = numbers.sort()
+//     max = max.reverse()
+//     let sorted = []
+//     for (let i = 0; i < max.length; i++) {
+//         let op1 = [max[i], max[i + 1]].join('')
+//         let op2 = [max[i + 1], max[i]].join('')
+//         if (+op1 >= +op2) {
+//             sorted.push(max[i])
+//         } else {
+//             let temp = max[i]
+//             max[i] = max[i + 1]
+//             max[i + 1] = temp
+//             sorted.pop()
+//             i -= 2
+//         }
+//     }
+//     return sorted.join('')
+// }
+
+// console.log(solution([3, 30, 32, 34, 5, 9]))
+
+// function solution(citations) {
+//     let baguni = []
+//     let maxer = Math.max.apply(null, citations)
+//     for (let i = 0; i <= maxer; i++) {
+//         if (i <= citations.length) {
+//             let countplus = 0
+//             for (let j = 0; j < citations.length; j++) {
+//                 if (i <= citations[j]) {
+//                     countplus++
+//                 }
+//             }
+//             if (countplus >= i) {
+//                 baguni.push(i)
+//             }
+//         } else {
+//             break
+//         }
+//     }
+//     console.log(baguni)
+//     return baguni.sort()[baguni.length - 1]
+// }
+
+// console.log(solution([3, 0, 1, 1, 1, 1, 6, 1, 5, 5, 5, 5, 5]))
+
+// function solution(scoville, K) {
+//     scoville.sort((x, y) => x - y)
+//     let firstTest = scoville.reduce((x, y) => x + y, 0)
+//     if (firstTest < K) return -1
+//     let count = 0
+//     let switcher = false
+//     while (switcher == false) {
+//         if (scoville[0] < K || scoville[1] < K) {
+//             if (scoville[0] !== scoville[1]) {
+//                 let hap = scoville[0] + scoville[1] * 2
+//                 scoville.shift()
+//                 scoville.shift()
+//                 scoville.unshift(hap)
+//                 scoville.sort((x, y) => x - y)
+//                 count++
+//             } else {
+//                 let flag = false
+//                 let idx = 2
+//                 while (flag == false) {
+//                     if (scoville[0] !== scoville[idx]) {
+//                         let hap2 = scoville[0] + scoville[idx]
+//                         scoville.shift()
+//                         scoville.splice(idx, 1, hap2)
+//                         scoville.sort((x, y) => x - y)
+//                         flag = true
+//                     } else {
+//                         idx++
+//                     }
+//                 }
+//                 count++
+//             }
+//         } else {
+//             switcher = true
+//         }
+//     }
+//     return count
+// }
+
+// K = 8
+// [1,1,4,4,5,5]
+
+// function solution(scoville, K) {
+//     scoville.sort((x, y) => x - y)
+//     let firstTest = scoville.reduce((x, y) => x + y, 0)
+//     if (firstTest < K) return -1
+//     let count = 0
+//     let switcher = false
+//     while (switcher == false) {
+//         if (scoville[0] < K || scoville[1] < K) {
+//             let hap = scoville[0] + scoville[1] * 2
+//             scoville.shift()
+//             scoville.shift()
+//             scoville.unshift(hap)
+//             scoville.sort((x, y) => x - y)
+//             count++
+//         } else {
+//             switcher = true
+//         }
+//     }
+//     return count
+// }
+
+// function solution(scoville, K) {
+//     let answer = 0
+//     let newScoville = []
+//     scoville.sort((a, b) => a - b)
+//     let left = 0
+//     let right = 0
+//     while (
+//         scoville.length - left + newScoville.length - right >= 2 &&
+//         (scoville[left] < K || newScoville[right] < K)
+//     ) {
+//         let origin1
+//         let origin2
+//         let new1
+//         let new2
+//         if (left < scoville.length) origin1 = scoville[left]
+//         if (left + 1 < scoville.length) origin2 = scoville[left + 1]
+//         if (right < newScoville.length) new1 = newScoville[right]
+//         if (right + 1 < newScoville.length) new2 = newScoville[right + 1]
+//         if (
+//             newScoville.length === 0 ||
+//             right >= newScoville.length ||
+//             (origin2 !== undefined && origin2 <= new1)
+//         ) {
+//             left += 2
+//             newScoville.push(origin1 + origin2 * 2)
+//         } else if (
+//             left >= scoville.length ||
+//             (new2 !== undefined && new2 <= origin1)
+//         ) {
+//             right += 2
+//             newScoville.push(new1 + new2 * 2)
+//         } else {
+//             left += 1
+//             right += 1
+//             origin1 < new1
+//                 ? newScoville.push(origin1 + new1 * 2)
+//                 : newScoville.push(new1 + origin1 * 2)
+//         }
+//         answer += 1
+//     }
+//     return scoville[left] < K || newScoville[right] < K ? -1 : answer
+// }
+
+function solution(numbers) {
+    let piece = numbers.split('')
+    let count = 0
+    let temp = []
+    const findSosu = (num) => {
+        if (num <= 1) return false
+        for (let i = 2; i < num; i++) {
+            if (num % i == 0) return false
+        }
+        return true
+    }
+    const recursive = (made, arr) => {
+        if (arr.length == 0) {
+            return
+        }
+        for (let i = 0; i < arr.length; i++) {
+            let copy = made
+            copy += arr[i]
+            if (copy[0] == '0' && copy.length > 1) {
+                copy = copy.split('')
+                copy.shift()
+                copy = copy.join('')
+            }
+            let copyArr = arr.slice()
+            copyArr.splice(i, 1)
+            if (!temp.includes(copy)) {
+                temp.push(copy)
+                if (findSosu(+copy) == true) {
+                    count++
+                }
+            }
+            recursive(copy, copyArr)
+        }
+    }
+    recursive('', piece)
+    return count
+}
+
+solution('011')
