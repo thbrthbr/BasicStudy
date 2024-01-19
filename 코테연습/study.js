@@ -2283,42 +2283,42 @@
 //     return scoville[left] < K || newScoville[right] < K ? -1 : answer
 // }
 
-function solution(numbers) {
-    let piece = numbers.split('')
-    let count = 0
-    let temp = []
-    const findSosu = (num) => {
-        if (num <= 1) return false
-        for (let i = 2; i < num; i++) {
-            if (num % i == 0) return false
-        }
-        return true
-    }
-    const recursive = (made, arr) => {
-        if (arr.length == 0) {
-            return
-        }
-        for (let i = 0; i < arr.length; i++) {
-            let copy = made
-            copy += arr[i]
-            if (copy[0] == '0' && copy.length > 1) {
-                copy = copy.split('')
-                copy.shift()
-                copy = copy.join('')
-            }
-            let copyArr = arr.slice()
-            copyArr.splice(i, 1)
-            if (!temp.includes(copy)) {
-                temp.push(copy)
-                if (findSosu(+copy) == true) {
-                    count++
-                }
-            }
-            recursive(copy, copyArr)
-        }
-    }
-    recursive('', piece)
-    return count
-}
+// function solution(numbers) {
+//     let piece = numbers.split('')
+//     let count = 0
+//     let temp = []
+//     const findSosu = (num) => {
+//         if (num <= 1) return false
+//         for (let i = 2; i < num; i++) {
+//             if (num % i == 0) return false
+//         }
+//         return true
+//     }
+//     const recursive = (made, arr) => {
+//         if (arr.length == 0) {
+//             return
+//         }
+//         for (let i = 0; i < arr.length; i++) {
+//             let copy = made
+//             copy += arr[i]
+//             if (copy[0] == '0' && copy.length > 1) {
+//                 copy = copy.split('')
+//                 copy.shift()
+//                 copy = copy.join('')
+//             }
+//             let copyArr = arr.slice()
+//             copyArr.splice(i, 1)
+//             if (!temp.includes(copy)) {
+//                 temp.push(copy)
+//                 if (findSosu(+copy) == true) {
+//                     count++
+//                 }
+//             }
+//             recursive(copy, copyArr)
+//         }
+//     }
+//     recursive('', piece)
+//     return count
+// }
 
-solution('011')
+// solution('011')
