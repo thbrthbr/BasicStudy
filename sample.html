@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            div {
+                display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="1">안녕</div>
+        <script>
+            let id = '1'
+            let placeToAdd = document.getElementById(id)
+            let newPiece1 = document.createElement('div')
+            newPiece1.style.borderLeft = '7.5px solid transparent'
+            newPiece1.style.borderBottom = '15px solid transparent'
+            newPiece1.style.borderTop = '15px solid #D8BE0F'
+            newPiece1.style.borderRight = '7.5px solid #D8BE0F'
+            let bigNewPiece = document.createElement('div')
+            bigNewPiece.style.borderLeft = '15px solid #D8BE0F'
+            bigNewPiece.style.borderBottom = '10px solid #D8BE0F'
+            bigNewPiece.style.borderTop = '10px solid #D8BE0F'
+            bigNewPiece.style.borderRight = '15px solid #D8BE0F'
+            bigNewPiece.style.position = 'relative'
+            let newPiece = document.createElement('div')
+            newPiece.style.borderLeft = '7.5px solid #D8BE0F'
+            newPiece.style.borderBottom = '15px solid #D8BE0F'
+            newPiece.style.borderTop = '15px solid transparent'
+            newPiece.style.borderRight = '7.5px solid transparent'
+            let img = document.createElement('img')
+            img.style.width = '1px'
+            img.style.position = 'absolute'
+            // img.style.img.src =
+            //     'https://archives.bulbagarden.net/media/upload/3/3d/Bag_Loaded_Dice_SV_Sprite.png'
+            placeToAdd.appendChild(newPiece1)
+            bigNewPiece.appendChild(img)
+            placeToAdd.appendChild(bigNewPiece)
+            placeToAdd.appendChild(newPiece)
+        </script>
+    </body>
+</html>
