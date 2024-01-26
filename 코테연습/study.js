@@ -2324,3 +2324,208 @@
 // solution('011')
 //
 //
+
+// function solution(clothes) {
+//     let obj ={}
+//     let set = new Set()
+//     for (let i = 0; i < clothes.length; i++) {
+//         set.add(clothes[i][1])
+//         obj[clothes] = 0;
+//     }
+//     set = [...set]
+//     let possible = new Set()
+//     const recursive = (depth, johab, species) => {
+//         if (depth == set.length) {
+//             possible.add(johab.sort().join(':'))
+//             return
+//         }
+//         for (let i = 0; i < clothes.length; i++) {
+//             let copy = johab.slice()
+//             let speciesCopy = species.slice()
+//             let copyNum = depth
+//             if (!speciesCopy.includes(clothes[i][1])) {
+//                 copy.push(clothes[i][0])
+//                 speciesCopy.push(clothes[i][1])
+//             }
+//             recursive(copyNum + 1, copy, speciesCopy)
+//         }
+//     }
+//     recursive(0, [], [])
+//     console.log(possible)
+//     return [...possible].length
+// }
+
+// function solution(clothes) {
+//     let set = new Set()
+//     for (let i = 0; i < clothes.length; i++) {
+//         set.add(clothes[i][1])
+//     }
+//     set = [...set]
+//     let possible = new Set()
+//     const recursive = (depth, johab, species) => {
+//         if (depth == set.length) {
+//             possible.add(Array.from(johab).join(':'))
+//             return
+//         }
+//         for (let i = 0; i < clothes.length; i++) {
+//             let copy = new Set(johab)
+//             let speciesCopy = new Set(species)
+//             let copyNum = depth
+//             if (!speciesCopy.has(clothes[i][1])) {
+//                 copy.add(clothes[i][0])
+//                 speciesCopy.add(clothes[i][1])
+//             }
+//             recursive(copyNum + 1, copy, speciesCopy)
+//         }
+//     }
+//     recursive(0, new Set(), new Set())
+//     console.log(possible)
+//     return [...possible].length
+// }
+
+// function solution(clothes) {
+//     let set = new Set()
+//     for (let i = 0; i < clothes.length; i++) {
+//         set.add(clothes[i][1])
+//     }
+//     set = [...set]
+//     let possible = new Set()
+//     const recursive = (depth, johab, species) => {
+//         if (depth == set.length) {
+//             possible.add(johab)
+//             return
+//         }
+//         for (let i = 0; i < clothes.length; i++) {
+//             let copy = johab
+//             let speciesCopy = species
+//             let copyNum = depth
+//             if (!speciesCopy.includes(clothes[i][1])) {
+//                 copy = copy + ':' + clothes[i][0]
+//                 speciesCopy = speciesCopy + ':' + clothes[i][1]
+//             }
+//             recursive(copyNum + 1, copy, speciesCopy)
+//         }
+//     }
+//     recursive(0, '', '')
+//     console.log(possible)
+//     return [...possible].length
+// }
+
+// function solution(clothes) {
+//     let obj = {}
+//     for (let i = 0; i < clothes.length; i++) {
+//         obj[clothes[i][0]] = 0
+//     }
+//     let num = Object.keys(obj).length
+//     let possible = new Set()
+//     const recursive = (depth, johab, species) => {
+//         if (depth == num) {
+//             possible.add(JSON.stringify(johab))
+//             return
+//         }
+//         for (let i = 0; i < clothes.length; i++) {
+//             let copy = { ...johab }
+//             let speciesCopy = species.slice()
+//             let copyNum = depth
+//             if (!speciesCopy.includes(clothes[i][1])) {
+//                 copy[clothes[i][0]] += 1
+//                 speciesCopy.push(clothes[i][1])
+//             }
+//             recursive(copyNum + 1, copy, speciesCopy)
+//         }
+//     }
+//     recursive(0, { ...obj }, [])
+//     // console.log(possible)
+//     return [...possible].length
+// }
+
+// function solution(clothes) {
+//     let obj = {}
+//     let spe = {}
+//     for (let i = 0; i < clothes.length; i++) {
+//         obj[clothes[i][0]] = 0
+//         spe[clothes[i][1]] = 0
+//     }
+//     let possible = new Set()
+//     const recursive = (depth, johab, species) => {
+//         if (depth == clothes.length) {
+//             possible.add(JSON.stringify(johab))
+//             return
+//         }
+//         for (let i = 0; i < clothes.length; i++) {
+//             let copy = { ...johab }
+//             let speciesCopy = { ...species }
+//             let copyNum = depth
+//             if (speciesCopy[clothes[i][1]] <= 0) {
+//                 copy[clothes[i][0]] += 1
+//                 speciesCopy[clothes[i][1]] += 1
+//             }
+//             recursive(copyNum + 1, copy, speciesCopy)
+//         }
+//     }
+//     recursive(0, { ...obj }, { ...spe })
+//     // console.log(possible)
+//     return [...possible].length
+// }
+
+// function solution(clothes) {
+//     let answer = 1
+//     const clothesCategory = {}
+
+//     clothes.forEach((e) => {
+//         const category = e[1]
+
+//         if (clothesCategory[category] === undefined) {
+//             clothesCategory[category] = [e[0]]
+//         } else {
+//             clothesCategory[category].push(e[0])
+//         }
+//     })
+
+//     // return clothesCategory
+//     for (const [key, value] of Object.entries(clothesCategory)) {
+//         answer *= value.length + 1
+//     }
+
+// return answer - 1
+// }
+
+// console.log(
+//     solution([
+//         ['yellow_hat', 'headgear'],
+//         ['blue_sunglasses', 'eyewear'],
+//         ['green_turban', 'headgear'],
+//     ]),
+// )
+function solution(genres, plays) {
+    let order = []
+    let obj = {}
+    let obj2 = {}
+    for (let i = 0; i < genres.length; i++) {
+        if (obj[genres[i]] == undefined) {
+            obj[genres[i]] = [[i, plays[i]]]
+            obj2[genres[i]] = plays[i]
+        } else {
+            obj[genres[i]].push([i, plays[i]])
+            obj2[genres[i]] += plays[i]
+        }
+    }
+    let forOrder = []
+    for (const [key, value] of Object.entries(obj2)) {
+        forOrder.push([key, value])
+    }
+    forOrder.sort((x, y) => y[1] - x[1])
+    for (let i = 0; i < forOrder.length; i++) {
+        let temp = obj[forOrder[i][0]].sort((x, y) => y[1] - x[1])
+        if (temp.length < 2) {
+            order.push(temp[0][0])
+        } else {
+            for (let j = 0; j < 2; j++) {
+                order.push(temp[j][0])
+            }
+        }
+    }
+    return order
+}
+
+console.log(solution(['pop', 'jpop', 'jpop'], [1, 1, 1]))
