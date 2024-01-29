@@ -2497,35 +2497,86 @@
 //         ['green_turban', 'headgear'],
 //     ]),
 // )
-function solution(genres, plays) {
-    let order = []
-    let obj = {}
-    let obj2 = {}
-    for (let i = 0; i < genres.length; i++) {
-        if (obj[genres[i]] == undefined) {
-            obj[genres[i]] = [[i, plays[i]]]
-            obj2[genres[i]] = plays[i]
-        } else {
-            obj[genres[i]].push([i, plays[i]])
-            obj2[genres[i]] += plays[i]
+// function solution(genres, plays) {
+//     let order = []
+//     let obj = {}
+//     let obj2 = {}
+//     for (let i = 0; i < genres.length; i++) {
+//         if (obj[genres[i]] == undefined) {
+//             obj[genres[i]] = [[i, plays[i]]]
+//             obj2[genres[i]] = plays[i]
+//         } else {
+//             obj[genres[i]].push([i, plays[i]])
+//             obj2[genres[i]] += plays[i]
+//         }
+//     }
+//     let forOrder = []
+//     for (const [key, value] of Object.entries(obj2)) {
+//         forOrder.push([key, value])
+//     }
+//     forOrder.sort((x, y) => y[1] - x[1])
+//     for (let i = 0; i < forOrder.length; i++) {
+//         let temp = obj[forOrder[i][0]].sort((x, y) => y[1] - x[1])
+//         if (temp.length < 2) {
+//             order.push(temp[0][0])
+//         } else {
+//             for (let j = 0; j < 2; j++) {
+//                 order.push(temp[j][0])
+//             }
+//         }
+//     }
+//     return order
+// }
+
+// console.log(solution(['pop', 'jpop', 'jpop'], [1, 1, 1]))
+
+// function solution(bridge_length, weight, truck_weights) {
+//     let current = 0
+//     let waiters = truck_weights.slice()
+//     let time = 0
+//     let lengthLeft = []
+//     while (truck_weights.length > 0 || current > 0) {
+//         if (current + truck_weights[0] <= weight) {
+//             lengthLeft.push(bridge_length)
+//             current += truck_weights[0]
+//             truck_weights.shift()
+//         }
+//         for (let i = 0; i < lengthLeft.length; i++) {
+//             lengthLeft[i] -= 1
+//             if (lengthLeft[i] == 0) {
+//                 lengthLeft.shift()
+//                 current -= waiters[0]
+//                 waiters.shift()
+//                 i = -1
+//             }
+//         }
+//         time++
+//     }
+//     return time + 1
+// }
+
+// console.log(solution(100, 100, [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]))
+
+function solution(word) {
+    let list = ['A', 'E', 'I', 'O', 'U']
+    let order = 0
+    let answer = 0
+    const recursive = (word2) => {
+        if (word2.length == 5) {
+            return
         }
-    }
-    let forOrder = []
-    for (const [key, value] of Object.entries(obj2)) {
-        forOrder.push([key, value])
-    }
-    forOrder.sort((x, y) => y[1] - x[1])
-    for (let i = 0; i < forOrder.length; i++) {
-        let temp = obj[forOrder[i][0]].sort((x, y) => y[1] - x[1])
-        if (temp.length < 2) {
-            order.push(temp[0][0])
-        } else {
-            for (let j = 0; j < 2; j++) {
-                order.push(temp[j][0])
+        for (let i = 0; i < list.length; i++) {
+            let str = word2
+            str += list[i]
+            order++
+            if (str == word) {
+                answer = order
             }
+            recursive(str)
         }
     }
-    return order
+    recursive('')
+    return answer
 }
 
-console.log(solution(['pop', 'jpop', 'jpop'], [1, 1, 1]))
+console.log(solution('EIO'))
