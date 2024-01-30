@@ -2557,28 +2557,28 @@
 
 // console.log(solution(100, 100, [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]))
 
-function solution(word) {
-    let list = ['A', 'E', 'I', 'O', 'U']
-    let order = 0
-    let answer = 0
-    const recursive = (word2) => {
-        if (word2.length == 5) {
-            return
-        }
-        for (let i = 0; i < list.length; i++) {
-            let str = word2
-            str += list[i]
-            order++
-            if (str == word) {
-                answer = order
-            }
-            recursive(str)
-        }
-    }
-    recursive('')
-    return answer
-}
+// function solution(word) {
+//     let list = ['A', 'E', 'I', 'O', 'U']
+//     let order = 0
+//     let answer = 0
+//     const recursive = (word2) => {
+//         if (word2.length == 5) {
+//             return
+//         }
+//         for (let i = 0; i < list.length; i++) {
+//             let str = word2
+//             str += list[i]
+//             order++
+//             if (str == word) {
+//                 answer = order
+//             }
+//             recursive(str)
+//         }
+//     }
+//     recursive('')
+//     return answer
+// }
 
-console.log(solution('EIO'))
-//
-//
+// console.log(solution('EIO'))
+// //
+// //
