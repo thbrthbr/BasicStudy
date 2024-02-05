@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <input class="file" type="file" onchange="generate()" />
+        <script>
+            const generate = () => {
+                let file = document.getElementsByClassName('file')
+                console.log(file[0].files[0])
+                const READER = new FileReader()
+                READER.readAsText(file[0].files[0], 'UTF-8')
+                let final = ''
+                READER.onload = (e) => {
+                    try {
+                        let str = e.target.result
+                        console.log(str.split('\n'))
+                        let copy = str.split('\n')
+                        for (let i = 0; i < copy.length; i++) {
+                            if (!copy[i].trim().includes('.png')) {
+                                final += `'${copy[i].trim()}',`
+                                final += '\n'
+                            }
+                        }
+                        console.log(final)
+                        // let pasteData = JSON.parse(str)
+                        // setEachSide(pasteData)
+                    } catch (e) {}
+                }
+            }
+        </script>
+    </body>
+</html>
