@@ -2581,3 +2581,8 @@
 
 // console.log(solution('EIO'))
 // //
+console.log(new Date().getDate())
+let dd = String(new Date().getDate())
+let mm = String(new Date().getMonth() + 1).padStart(2, '0')
+let yy = String(new Date().getFullYear())
+console.log([yy, mm, dd])
