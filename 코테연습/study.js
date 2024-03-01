@@ -2587,5 +2587,5 @@
 // let yy = String(new Date().getFullYear())
 // console.log([yy, mm, dd])
 
-let loser = '111111..'
-console.log(loser.slice(0, -1))
+// let loser = '111111..'
+// console.log(loser.slice(0, -1))
