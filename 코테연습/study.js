@@ -2586,3 +2586,6 @@
 // let mm = String(new Date().getMonth() + 1).padStart(2, '0')
 // let yy = String(new Date().getFullYear())
 // console.log([yy, mm, dd])
+
+let loser = '111111..'
+console.log(loser.slice(0, -1))
