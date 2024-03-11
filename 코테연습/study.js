@@ -2835,4 +2835,3 @@ console.log(solution('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']))
 //
 //
 //
-//
