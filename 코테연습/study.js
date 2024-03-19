@@ -2832,3 +2832,4 @@ function solution(begin, target, words) {
 console.log(solution('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']))
 //
 //
+//
