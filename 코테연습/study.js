@@ -2590,3 +2590,243 @@
 // let loser = '111111..'
 // console.log(loser.slice(0, -1))
 //
+// function solution(n, computers) {
+//     let networks = []
+//     const recursive = (cur, oneNetwork) => {
+//         let temp = oneNetwork.slice()
+//         let curPC = computers[cur]
+//         let check = false
+//         for (let i = 0; i < curPC.length; i++) {
+//             if (curPC[i] == 1 && !temp.includes(i)) {
+//                 check = true
+//                 console.log([...temp, i])
+//                 recursive(i, [...temp, i])
+//             }
+//         }
+//         if (check == false) {
+//             networks.push(temp)
+//             return
+//         }
+//     }
+//     recursive(0, [])
+//     return networks
+// }
+
+// function solution(n, computers) {
+//     let networks = []
+//     const recursive = (cur, count, network, length) => {
+//         if (n <= count) {
+//             networks.push(network)
+//             return
+//         }
+//         for (let i = 0; i < length; i++) {
+//             if (computers[cur][i] == 1) {
+//                 let temp = new Set([...network])
+//                 temp.add(i)
+//                 recursive(i, count + 1, temp, computers[cur].length)
+//             } else {
+//                 let temp = new Set()
+//                 temp.add(i)
+//                 recursive(i, count + 1, temp, computers[cur].length)
+//             }
+//         }
+//     }
+//     recursive(0, 0, new Set(), n)
+//     let stringified = new Set()
+//     for (let i = 0; i < networks.length; i++) {
+//         if ([...networks[i]].join('')) {
+//             stringified.add([...networks[i]].sort().join(''))
+//         }
+//     }
+//     let arr = [...stringified]
+//     let max = ''
+//     let maxLength = 0
+//     let final = []
+//     for (let i = 0; i < arr.length; i++) {
+//         if (maxLength < arr[i].length) {
+//             max = arr[i]
+//             maxLength = arr[i].length
+//         }
+//     }
+//     for (let i = 0; i < arr.length; i++) {
+//         if (!max.includes(arr[i])) {
+//             final.push(arr[i])
+//         }
+//     }
+//     return final.length + 1
+// }
+
+// console.log(
+//     solution(3, [
+//         [1, 1, 0],
+//         [1, 1, 0],
+//         [0, 0, 1],
+//     ]),
+// )
+// solution(3, [
+//     [1, 1, 0],
+//     [1, 1, 0],
+//     [0, 0, 1],
+// ])
+// function solution(n, computers) {
+//     const visited = new Array(n).fill(0)
+//     let count = 0
+//     const dfs = (map, visited, node) => {
+//         visited[node] = 1
+
+//         for (let i = 0; i < map[node].length; i++) {
+//             if (map[node][i] && visited[i] === 0) {
+//                 dfs(map, visited, i)
+//             }
+//         }
+//     }
+
+//     for (let i = 0; i < visited.length; i++) {
+//         if (visited[i] === 1) continue
+//         console.log('에?')
+//         count += 1
+//         dfs(computers, visited, i)
+//     }
+
+//     return count
+// }
+
+// function solution(n, computers) {
+//     let answer = 0
+//     const visited = []
+
+//     const dfs = (node, visited, computers) => {
+//         visited[node] = true // 현재 node를 방문처리 하고
+//         for (let i = 0; i < computers.length; i++) {
+//             if (computers[node][i] === 1 && !visited[i])
+//                 // 연결된 노드가 있고 해당 노드를 방문하지 않았다면
+//                 dfs(i, visited, computers) // dfs로 방문 진행
+//         }
+//     }
+
+//     // 일단 모든 노드를 돌 거임
+//     for (let i = 0; i < n; i++) {
+//         if (!visited[i]) {
+//             // 먼저 첫번째 노드를 들어가서 연결되어 있는 건 다 돌고 한번이라도 돈 node는 안 돌게끔 true로 체크해둘 것
+//             dfs(i, visited, computers) // 방문하지 않은 노드에서 dfs 탐색
+//             answer++ // 해당 시점에서는 위의 조건문으로 이미 위에 dfs 탐색에서 방문된 노드는 더 이상 방문하지 않는 것이 보장됨
+//             // 따라서 그냥 방문 후 개수 count 해도 중복 발생 X
+//         }
+//     }
+
+//     return answer
+// }
+
+// console.log(
+//     solution(3, [
+//         [1, 1, 0],
+//         [1, 1, 0],
+//         [0, 0, 1],
+//     ]),
+// )
+
+// function solution(begin, target, words) {
+//     if (!words.includes(target)) {
+//         return 0
+//     }
+//     let visited = Array(words.length).fill(0)
+//     let queue = [begin]
+
+//     const compare = (str1, str2) => {
+//         let count = 0
+//         for (let i = 0; i < str1.length; i++) {
+//             if (str1[i] !== str2[i]) count++
+//         }
+//         return count === 1 ? true : false
+//     }
+
+//     const countVisit = (arr) => {
+//         let sum = 0
+//         for (let i = 0; i < arr.length; i++) {
+//             if (arr[i] == 1) sum++
+//         }
+//         return sum
+//     }
+
+//     while (queue.length > 0) {
+//         for (let i = 0; i < words.length; i++) {
+//             if (visited[i] == 0 && compare(queue[queue.length - 1], words[i])) {
+//                 if (words[i] == target) return countVisit(visited)
+//                 queue.push(words[i])
+//                 visited[i] = 1
+//                 console.log(words[i])
+//             }
+//         }
+//     }
+// }
+
+// function solution(begin, target, words) {
+//     if (!words.includes(target)) {
+//         return 0
+//     }
+//     let queue = [[begin, Array(words.length).fill(0)]]
+//     let save = []
+//     const compare = (str1, str2) => {
+//         let count = 0
+//         for (let i = 0; i < str1.length; i++) {
+//             if (str1[i] !== str2[i]) count++
+//         }
+//         return count === 1 ? true : false
+//     }
+
+//     const countVisit = (arr) => {
+//         let sum = 0
+//         for (let i = 0; i < arr.length; i++) {
+//             if (arr[i] == 1) sum++
+//         }
+//         return sum
+//     }
+
+//     while (queue.length > 0) {
+//         for (let i = 0; i < words.length; i++) {
+//             if (
+//                 queue[queue.length - 1][1][i] == 0 &&
+//                 compare(queue[queue.length - 1][0], words[i])
+//             ) {
+//                 // if (words[i] == target)
+//                 //     return countVisit(queue[queue.length - 1][1])
+//                 let copy = queue[queue.length - 1][1].slice()
+//                 copy[i] = 1
+//                 queue.push([words[i], copy])
+//             }
+//         }
+//         save.push(queue[0])
+//         queue.shift()
+//     }
+//     console.log(save)
+// }
+
+function solution(begin, target, words) {
+    const visited = { [begin]: 0 }
+    const queue = [begin]
+
+    const isConnected = (str1, str2) => {
+        let count = 0
+        const len = str1.length
+
+        for (let i = 0; i < len; i++) {
+            if (str1[i] !== str2[i]) count++
+        }
+
+        return count === 1 ? true : false
+    }
+
+    while (queue.length) {
+        const cur = queue.shift()
+        if (cur === target) break
+        for (const word of words) {
+            if (!visited[word] && isConnected(word, cur)) {
+                visited[word] = visited[cur] + 1
+                queue.push(word)
+            }
+        }
+    }
+    return visited[target] ? visited[target] : 0
+}
+
+console.log(solution('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']))
