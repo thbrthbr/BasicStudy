@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+            integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+    </head>
+    <body>
+        <textarea class="insert"></textarea>
+        <br />
+        <button onclick="readText()">클릭</button>
+        <button onclick="makeZip2()">테스트</button>
+        <div class="main"></div>
+        <script>
+            const readText = () => {
+                let text = document.querySelector('.insert').value
+                text = text.split(',')
+                let init = document.querySelector('.main')
+                for (let i = 0; i < text.length; i++) {
+                    // var a = document.createElement('a')
+                    // a.href = 'https:' + text[i].replace(`"`, ``)
+                    // a.download = i + "-" +Date.now()
+                    // a.click()
+                    let url = 'https:' + text[i].replace(`"`, ``)
+                    makeZip(url)
+                    // let div = document.createElement('div')
+                    // let img = document.createElement('img')
+                    // img.src = url
+                    // div.appendChild(img)
+                    // init.appendChild(div)
+                }
+            }
+
+            const toDataURL = (url) =>
+                fetch(url)
+                    .then((response) => response.blob())
+                    .then(
+                        (blob) =>
+                            new Promise((resolve, reject) => {
+                                const reader = new FileReader()
+                                reader.onloadend = () => resolve(reader.result)
+                                reader.onerror = reject
+                                reader.readAsDataURL(blob)
+                            }),
+                    )
+
+            const makeZip = (url) => {
+                toDataURL(url).then((dataUrl) => {
+                    var zip = new JSZip()
+                    zip.file('Hello.txt', 'Hello World\n')
+                    var img = zip.folder('images')
+                    img.file('smile.gif', dataUrl, { base64: true })
+                    zip.generateAsync({ type: 'blob' }).then(function (
+                        content,
+                    ) {
+                        saveAs(content, 'example.zip')
+                    })
+                })
+                // var zip = new JSZip()
+                // zip.file('Hello.txt', 'Hello World\n')
+                // var img = zip.folder('images')
+                // img.file(
+                //     'smile.gif',
+                //     'http://www.pl4050.com/kr//02/4074/28470/1486300789406.jpeg?v=ei',
+                //     { base64: true },
+                // )
+                // zip.generateAsync({ type: 'blob' }).then(function (content) {
+                //     // see FileSaver.js
+                //     saveAs(content, 'example.zip')
+                // })
+            }
+            const makeZip2 = () => {
+                toDataURL(
+                    'http://www.pl4050.com/kr//02/4074/28470/1486300789406.jpeg?v=ei',
+                ).then((dataUrl) => {
+                    var zip = new JSZip()
+                    zip.file('Hello.txt', 'Hello World\n')
+                    var img = zip.folder('images')
+                    img.file('smile.png', dataUrl, { base64: true })
+                    zip.generateAsync({ type: 'blob' }).then(function (
+                        content,
+                    ) {
+                        saveAs(content, 'example.zip')
+                    })
+                })
+                // var zip = new JSZip()
+                // zip.file('Hello.txt', 'Hello World\n')
+                // var img = zip.folder('images')
+                // img.file(
+                //     'smile.gif',
+                //     'http://www.pl4050.com/kr//02/4074/28470/1486300789406.jpeg?v=ei',
+                //     { base64: true },
+                // )
+                // zip.generateAsync({ type: 'blob' }).then(function (content) {
+                //     // see FileSaver.js
+                //     saveAs(content, 'example.zip')
+                // })
+            }
+            let arr = [
+                '//www.pl4050.com/kr//02/4074/28470/1486300789406.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300794461.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300799531.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300804586.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300809641.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300814679.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300819718.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300824774.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300829812.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300834851.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300839890.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300844922.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300849974.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300855013.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300860052.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300865106.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300870148.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300875187.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300880242.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300885280.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300890323.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300895377.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300900416.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300905455.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300910509.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300915582.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300920636.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300925690.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300930729.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300935850.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300940904.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300946239.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300951294.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300956349.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300961403.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300966442.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300971481.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300976504.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300981547.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300986585.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300991655.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486300996694.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301001753.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301006823.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301011862.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301016933.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301021974.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301027012.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301032051.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301037121.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301042160.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301047219.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301052258.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301057297.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301062351.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301067391.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301072446.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301077484.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301082523.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301087555.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301092626.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301097664.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301102766.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301107804.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301112841.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301117880.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301122935.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301127973.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301133034.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301138089.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301143112.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301148166.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301153182.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301158257.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301163296.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301168351.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301173389.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301178445.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301183499.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301188538.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301193592.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301198637.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301203707.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301208762.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301213800.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301218839.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301223881.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301228951.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301234006.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301239044.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301244092.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301249146.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301254201.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301259255.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301264301.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301269339.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301274395.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301279449.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301284508.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301289547.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301294586.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301299625.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301304679.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301309737.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301314760.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301319799.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301324837.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301329863.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301334917.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301339956.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301344995.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301350042.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301355097.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301360136.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301365174.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301370215.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301375270.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301380324.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301385367.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301390422.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301395461.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301400516.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301405570.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301410625.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301415672.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301420719.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301425758.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301430849.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301435904.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301440940.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301446012.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301451066.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301456105.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301461158.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301466213.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301471252.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301476290.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301481337.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301486404.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301491458.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301496513.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301501536.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301506579.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301511633.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301516688.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301521742.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301526782.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301531821.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301536875.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301541914.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301546961.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301552012.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301557067.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301562106.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301567144.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301572185.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301577239.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301582278.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301587332.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301592389.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301597428.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301602482.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301607552.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301612638.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301617692.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301622733.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301627772.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301632815.jpeg?v=ei',
+                '//www.pl4050.com/kr//02/4074/28470/1486301637853.jpeg?v=ei',
+            ]
+            // const saveFilesAsZip = (files: File[]) => {
+            //     const zip = new JSZip()
+            //     const remoteZips = files.map(async (file: File) => {
+            //         const fetchedFile = await fetch(image.path)
+            //             .then((res: Response) => {
+            //                 if (res.status === 200) return res.blob()
+            //             })
+            //             .catch((err: any) => console.log(err))
+            //         if (fetchedFile) {
+            //             zip.file(`${file.name}.${file.type}`, fetchedFile, {
+            //                 binary: true,
+            //             })
+            //         }
+            //     })
+            //     Promise.all(remoteZips).then(() => {
+            //         zip.generateAsync({ type: 'blob' }).then((blob) => {
+            //             saveAs(blob, `test.zip`)
+            //         })
+            //     })
+            // }
+        </script>
+    </body>
+</html>

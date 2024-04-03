@@ -2801,32 +2801,113 @@
 //     console.log(save)
 // }
 
-function solution(begin, target, words) {
-    const visited = { [begin]: 0 }
-    const queue = [begin]
+// function solution(begin, target, words) {
+//     const visited = { [begin]: 0 }
+//     const queue = [begin]
 
-    const isConnected = (str1, str2) => {
-        let count = 0
-        const len = str1.length
+//     const isConnected = (str1, str2) => {
+//         let count = 0
+//         const len = str1.length
 
-        for (let i = 0; i < len; i++) {
-            if (str1[i] !== str2[i]) count++
+//         for (let i = 0; i < len; i++) {
+//             if (str1[i] !== str2[i]) count++
+//         }
+
+//         return count === 1 ? true : false
+//     }
+
+//     while (queue.length) {
+//         const cur = queue.shift()
+//         if (cur === target) break
+//         for (const word of words) {
+//             if (!visited[word] && isConnected(word, cur)) {
+//                 visited[word] = visited[cur] + 1
+//                 queue.push(word)
+//             }
+//         }
+//     }
+//     return visited[target] ? visited[target] : 0
+// }
+
+// console.log(solution('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']))
+// function solution(tickets) {
+//     tickets = tickets.sort()
+//     let visited = Array(tickets.length).fill(0)
+//     let startPoint = -1
+//     let begin = []
+//     for (let i = 0; i < tickets.length; i++) {
+//         if (tickets[i][0] == 'ICN') {
+//             startPoint = i
+//             begin = tickets[i]
+//             break
+//         }
+//     }
+//     let path = [begin[0]]
+//     let queue = [begin]
+//     visited[startPoint] = 1
+//     while (queue.length) {
+//         let cur = queue.shift()
+//         for (let i = 0; i < tickets.length; i++) {
+//             if (visited[i] == 0 && cur[1] == tickets[i][0]) {
+//                 visited[i] = 1
+//                 path.push(tickets[i][0])
+//                 if (!visited.includes(0)) path.push(tickets[i][1])
+//                 queue.push(tickets[i])
+//                 break
+//             }
+//         }
+//     }
+//     return path
+// }
+
+function solution(tickets) {
+    let queue = []
+    for (let i = 0; i < tickets.length; i++) {
+        if (tickets[i][0] == 'ICN') {
+            let arr = Array(tickets.length).fill('YET')
+            arr[i] = 'DONE'
+            queue.push([tickets[i], arr])
         }
-
-        return count === 1 ? true : false
     }
 
+    let save = []
     while (queue.length) {
-        const cur = queue.shift()
-        if (cur === target) break
-        for (const word of words) {
-            if (!visited[word] && isConnected(word, cur)) {
-                visited[word] = visited[cur] + 1
-                queue.push(word)
+        let cur = queue.shift()
+        if (cur[0].length == tickets.length + 1) save.push(cur[0])
+        for (let i = 0; i < tickets.length; i++) {
+            if (
+                cur[1][i] == 'YET' &&
+                cur[0][cur[0].length - 1] === tickets[i][0]
+            ) {
+                let copy = cur[1].slice()
+                let copy2 = cur[0].slice()
+                copy[i] = 'DONE'
+                copy2.push(tickets[i][1])
+                queue.push([copy2, copy])
             }
         }
     }
-    return visited[target] ? visited[target] : 0
+    save = save.sort()
+    return save[0]
 }
 
-console.log(solution('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']))
+console.log(
+    solution([
+        ['ICN', 'BOO'],
+        ['ICN', 'COO'],
+        ['COO', 'DOO'],
+        ['DOO', 'COO'],
+        ['BOO', 'DOO'],
+        ['DOO', 'BOO'],
+        ['BOO', 'ICN'],
+        ['COO', 'BOO'],
+    ]),
+)
+// ['ICN', 'BOO']
+// ['BOO', 'DOO']
+// ['DOO', 'BOO']
+// ['BOO', 'ICN']
+// ['ICN', 'COO']
+// ['COO', 'DOO']
+// ['DOO', 'COO']
+// ['COO', 'BOO']
