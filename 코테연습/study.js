@@ -2903,11 +2903,3 @@ console.log(
         ['COO', 'BOO'],
     ]),
 )
-// ['ICN', 'BOO']
-// ['BOO', 'DOO']
-// ['DOO', 'BOO']
-// ['BOO', 'ICN']
-// ['ICN', 'COO']
-// ['COO', 'DOO']
-// ['DOO', 'COO']
-// ['COO', 'BOO']
